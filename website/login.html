@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Architecture Firm</title>
+    <link rel="stylesheet" href="css/main.min.css">
+    <link rel="stylesheet" href="css/fontawesome.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f2f5f4;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .auth-container {
+            background: white;
+            border-radius: 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            max-width: 900px;
+            width: 100%;
+            display: flex;
+        }
+
+        .auth-left {
+            flex: 1;
+            background: linear-gradient(135deg, #da2128 0%, #d80007 100%);
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: white;
+        }
+
+        .auth-left h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            line-height: 1.3em;
+        }
+
+        .auth-left p {
+            font-size: 1rem;
+            opacity: 0.9;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .auth-right {
+            flex: 1;
+            padding: 60px 40px;
+        }
+
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e9e4e4;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 600;
+            color: #999;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .auth-tab.active {
+            color: #da2128;
+            border-bottom-color: #da2128;
+        }
+
+        .auth-tab:hover {
+            color: #da2128;
+        }
+
+        .form-container {
+            display: none;
+        }
+
+        .form-container.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #000000;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e9e4e4;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #da2128;
+            box-shadow: 0 0 0 3px rgba(218, 33, 40, 0.1);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .btn-primary {
+            background-color: #da2128;
+            color: white;
+            border: 2px solid #da2128;
+        }
+
+        .btn-primary:hover {
+            background-color: #d80007;
+            border-color: #d80007;
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .error-message {
+            background: #fee;
+            color: #c33;
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: none;
+            font-weight: 500;
+        }
+
+        .success-message {
+            background: #efe;
+            color: #3c3;
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: none;
+            font-weight: 500;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #da2128;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .logo-container {
+            margin-bottom: 30px;
+        }
+
+        .logo-container img {
+            max-width: 200px;
+            height: auto;
+        }
+
+        @media (max-width: 768px) {
+            .auth-container {
+                flex-direction: column;
+            }
+
+            .auth-left {
+                padding: 40px 30px;
+            }
+
+            .auth-left h1 {
+                font-size: 2rem;
+            }
+
+            .auth-right {
+                padding: 40px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-left">
+            <div class="logo-container">
+                <a href="index.html">
+                    <img src="images/logo-regular-free-img-200x65.png" alt="Logo" style="filter: brightness(0) invert(1);">
+                </a>
+            </div>
+            <h1>Buyer Portal</h1>
+            <p>Welcome to the real-estate buyer portal. Browse properties, save your favourites, and manage your property search all in one place.</p>
+            <a href="index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
+        <div class="auth-right">
+            <div class="auth-tabs">
+                <div class="auth-tab active" data-tab="login">Login</div>
+                <div class="auth-tab" data-tab="register">Register</div>
+            </div>
+
+            <div id="error-message" class="error-message"></div>
+            <div id="success-message" class="success-message"></div>
+
+            <!-- Login Form -->
+            <div id="login-form" class="form-container active">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="login-email">Email Address</label>
+                        <input type="email" id="login-email" name="email" required placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" name="password" required placeholder="Enter your password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+            </div>
+
+            <!-- Register Form -->
+            <div id="register-form" class="form-container">
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="register-name">Full Name</label>
+                        <input type="text" id="register-name" name="name" required placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="register-email">Email Address</label>
+                        <input type="email" id="register-email" name="email" required placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">Password</label>
+                        <input type="password" id="register-password" name="password" required placeholder="Create a password (min 6 characters)">
+                    </div>
+                    <div class="form-group">
+                        <label for="register-confirm-password">Confirm Password</label>
+                        <input type="password" id="register-confirm-password" name="confirmPassword" required placeholder="Confirm your password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </form>
+            </div>
+
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+                <p>Processing...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching
+        const tabs = document.querySelectorAll('.auth-tab');
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+        const errorMessage = document.getElementById('error-message');
+        const successMessage = document.getElementById('success-message');
+        const loading = document.getElementById('loading');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                if (tab.dataset.tab === 'login') {
+                    loginForm.classList.add('active');
+                    registerForm.classList.remove('active');
+                } else {
+                    loginForm.classList.remove('active');
+                    registerForm.classList.add('active');
+                }
+
+                hideMessages();
+            });
+        });
+
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+            successMessage.style.display = 'none';
+        }
+
+        function showSuccess(message) {
+            successMessage.textContent = message;
+            successMessage.style.display = 'block';
+            errorMessage.style.display = 'none';
+        }
+
+        function hideMessages() {
+            errorMessage.style.display = 'none';
+            successMessage.style.display = 'none';
+        }
+
+        function showLoading(show) {
+            loading.classList.toggle('show', show);
+            document.querySelectorAll('form').forEach(form => {
+                form.style.display = show ? 'none' : 'block';
+            });
+        }
+
+        async function readResponseJson(response) {
+            const text = await response.text();
+            try {
+                return text ? JSON.parse(text) : {};
+            } catch (error) {
+                return { error: text || 'Unexpected server response' };
+            }
+        }
+
+        function completeLocalLogin(user) {
+            const safeUser = {
+                email: user.email,
+                name: user.name || (user.email && user.email.split('@')[0]) || 'Buyer',
+                role: 'buyer'
+            };
+            localStorage.setItem('token', 'local-demo-token');
+            localStorage.setItem('user', JSON.stringify(safeUser));
+            showSuccess('Login successful! Redirecting to homepage...');
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 900);
+        }
+
+        function isOfflineMode() {
+            return window.location.protocol === 'file:' || window.location.search.includes('offline=1');
+        }
+
+        function getLocalUsers() {
+            try {
+                return JSON.parse(localStorage.getItem('krishan_local_users') || '[]');
+            } catch (error) {
+                return [];
+            }
+        }
+
+        function saveLocalUsers(users) {
+            localStorage.setItem('krishan_local_users', JSON.stringify(users));
+        }
+
+        function clearAuthSession() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+        }
+
+        function cameFromSitePage() {
+            if (!document.referrer) {
+                return false;
+            }
+
+            try {
+                const referrerUrl = new URL(document.referrer);
+                return referrerUrl.origin === window.location.origin && !referrerUrl.pathname.endsWith('/login.html');
+            } catch (error) {
+                return false;
+            }
+        }
+
+        function registerLocalUser(name, email, password) {
+            const users = getLocalUsers();
+            const exists = users.some(u => (u.email || '').toLowerCase() === email.toLowerCase());
+            if (exists) {
+                throw new Error('User with this email already exists');
+            }
+
+            const user = {
+                name: name.trim(),
+                email: email.trim().toLowerCase(),
+                password: password,
+                role: 'buyer'
+            };
+            users.push(user);
+            saveLocalUsers(users);
+            return user;
+        }
+
+        function loginLocalUser(email, password) {
+            const users = getLocalUsers();
+            const user = users.find(u => (u.email || '').toLowerCase() === email.toLowerCase());
+            if (!user || user.password !== password) {
+                throw new Error('Invalid email or password');
+            }
+            return user;
+        }
+
+        // Login form submission
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            hideMessages();
+            showLoading(true);
+
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            if (isOfflineMode()) {
+                try {
+                    const localUser = loginLocalUser(email, password);
+                    completeLocalLogin(localUser);
+                } catch (error) {
+                    showError(error.message);
+                    showLoading(false);
+                }
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await readResponseJson(response);
+
+                if (!response.ok) {
+                    if (response.status >= 500 || response.status === 404) {
+                        const localUser = loginLocalUser(email, password);
+                        completeLocalLogin(localUser);
+                        return;
+                    }
+                    throw new Error(data.error || 'Login failed');
+                }
+
+                // Store token and user data
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('user', JSON.stringify(data.user));
+
+                showSuccess('Login successful! Redirecting to homepage...');
+
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1000);
+            } catch (error) {
+                if (error.name === 'TypeError' || /fetch|network/i.test(error.message)) {
+                    try {
+                        const localUser = loginLocalUser(email, password);
+                        completeLocalLogin(localUser);
+                    } catch (localError) {
+                        showError(localError.message || 'Login failed');
+                        showLoading(false);
+                    }
+                    return;
+                }
+                showError(error.message);
+                showLoading(false);
+            }
+        });
+
+        // Register form submission
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            hideMessages();
+
+            const name = document.getElementById('register-name').value;
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+            const confirmPassword = document.getElementById('register-confirm-password').value;
+
+            if (password !== confirmPassword) {
+                showError('Passwords do not match');
+                return;
+            }
+
+            if (password.length < 6) {
+                showError('Password must be at least 6 characters long');
+                return;
+            }
+
+            if (isOfflineMode()) {
+                try {
+                    const user = registerLocalUser(name, email, password);
+                    completeLocalLogin(user);
+                } catch (error) {
+                    showError(error.message);
+                    showLoading(false);
+                }
+                return;
+            }
+
+            showLoading(true);
+
+            try {
+                const response = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name, email, password })
+                });
+
+                const data = await readResponseJson(response);
+
+                if (!response.ok) {
+                    if (response.status >= 500 || response.status === 404) {
+                        const localUser = registerLocalUser(name, email, password);
+                        completeLocalLogin(localUser);
+                        return;
+                    }
+                    throw new Error(data.error || 'Registration failed');
+                }
+
+                // Store token and user data
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('user', JSON.stringify(data.user));
+
+                showSuccess('Registration successful! Redirecting to homepage...');
+
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1000);
+            } catch (error) {
+                if (error.name === 'TypeError' || /fetch|network/i.test(error.message)) {
+                    try {
+                        const localUser = registerLocalUser(name, email, password);
+                        completeLocalLogin(localUser);
+                    } catch (localError) {
+                        showError(localError.message || 'Registration failed');
+                        showLoading(false);
+                    }
+                    return;
+                }
+                showError(error.message);
+                showLoading(false);
+            }
+        });
+
+        const logoutRequested = new URLSearchParams(window.location.search).get('logout') === '1';
+        const logoutFromSite = logoutRequested || cameFromSitePage();
+        if (logoutFromSite) {
+            clearAuthSession();
+            window.history.replaceState({}, '', window.location.pathname);
+        }
+
+        // Check if already logged in
+        if (localStorage.getItem('token') && !logoutFromSite) {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,680 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favourites Dashboard - Krishan Realty</title>
+    <link rel="stylesheet" href="css/main.min.css">
+    <link rel="stylesheet" href="css/fontawesome.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f2f5f4;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .dashboard-header {
+            background-color: #ffffff;
+            color: #000000;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-bottom: 6px solid #da2128;
+        }
+
+        .dashboard-header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #000000;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .user-details {
+            text-align: right;
+        }
+
+        .user-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #000000;
+        }
+
+        .user-role {
+            font-size: 0.9rem;
+            color: #da2128;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .logout-btn {
+            background-color: #da2128;
+            border: 2px solid #da2128;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .logout-btn:hover {
+            background-color: #d80007;
+            border-color: #d80007;
+        }
+
+        /* Main Content */
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 0;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-left: 4px solid #da2128;
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            background-color: #da2128;
+            color: white;
+        }
+
+        .stat-info h3 {
+            font-size: 2rem;
+            color: #000000;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .stat-info p {
+            color: #666;
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        /* Tabs */
+        .dashboard-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e9e4e4;
+            padding-bottom: 10px;
+        }
+
+        .dashboard-tab {
+            padding: 12px 25px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #666;
+            border-radius: 4px 4px 0 0;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .dashboard-tab.active {
+            background-color: #da2128;
+            color: white;
+        }
+
+        .dashboard-tab:hover:not(.active) {
+            background-color: #e9e4e4;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Properties Grid */
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .property-card {
+            background: white;
+            border-radius: 0;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .property-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .property-content {
+            padding: 25px;
+        }
+
+        .property-title {
+            font-size: 1.3rem;
+            color: #000000;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .property-location {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+
+        .property-description {
+            color: #777;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .property-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #da2128;
+            margin-bottom: 15px;
+        }
+
+        .property-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-favourite {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+        }
+
+        .btn-favourite.add {
+            background-color: #da2128;
+            color: white;
+            border: 2px solid #da2128;
+        }
+
+        .btn-favourite.add:hover {
+            background-color: #d80007;
+            border-color: #d80007;
+        }
+
+        .btn-favourite.remove {
+            background-color: #e9e4e4;
+            color: #000000;
+            border: 2px solid #e9e4e4;
+        }
+
+        .btn-favourite.remove:hover {
+            background-color: #d9d4d4;
+            border-color: #d9d4d4;
+        }
+
+        .btn-favourite:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            color: #e9e4e4;
+            margin-bottom: 20px;
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #000000;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #da2128;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Toast Notifications */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #333;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: none;
+            z-index: 1000;
+            animation: slideIn 0.3s ease;
+            font-weight: 500;
+        }
+
+        .toast.show {
+            display: block;
+        }
+
+        .toast.success {
+            background-color: #da2128;
+        }
+
+        .toast.error {
+            background-color: #d80007;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .dashboard-header {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .user-info {
+                flex-direction: column;
+            }
+
+            .user-details {
+                text-align: center;
+            }
+
+            .dashboard-container {
+                padding: 20px;
+            }
+
+            .properties-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="dashboard-header">
+        <h1><i class="fas fa-building"></i> Buyer Portal</h1>
+        <div class="user-info">
+            <div class="user-details">
+                <div class="user-name" id="user-name">Loading...</div>
+                <div class="user-role" id="user-role">Buyer</div>
+            </div>
+            <button class="logout-btn" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="dashboard-container">
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="total-properties">0</h3>
+                    <p>Available Properties</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="total-favourites">0</h3>
+                    <p>My Favourites</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="user-email">-</h3>
+                    <p>Your Email</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="dashboard-tabs">
+            <div class="dashboard-tab active" data-tab="all-properties">
+                <i class="fas fa-th-large"></i> All Properties
+            </div>
+            <div class="dashboard-tab" data-tab="my-favourites">
+                <i class="fas fa-heart"></i> My Favourites
+            </div>
+        </div>
+
+        <!-- All Properties Tab -->
+        <div id="all-properties" class="tab-content active">
+            <div id="properties-loading" class="loading">
+                <div class="spinner"></div>
+                <p>Loading properties...</p>
+            </div>
+            <div id="properties-grid" class="properties-grid"></div>
+            <div id="properties-empty" class="empty-state" style="display: none;">
+                <i class="fas fa-home"></i>
+                <h3>No Properties Available</h3>
+                <p>Check back later for new listings.</p>
+            </div>
+        </div>
+
+        <!-- My Favourites Tab -->
+        <div id="my-favourites" class="tab-content">
+            <div id="favourites-loading" class="loading">
+                <div class="spinner"></div>
+                <p>Loading your favourites...</p>
+            </div>
+            <div id="favourites-grid" class="properties-grid"></div>
+            <div id="favourites-empty" class="empty-state" style="display: none;">
+                <i class="fas fa-heart"></i>
+                <h3>No Favourites Yet</h3>
+                <p>Start adding properties to your favourites list!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script>
+        // Global state
+        const CATALOG_KEY = 'krishan_property_catalog';
+        const FAV_KEY = 'krishan_favourite_properties';
+        let allProperties = [];
+        let favouriteIds = new Set();
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            setupTabs();
+            loadData();
+            updateUserDisplay();
+            renderDashboard();
+        });
+
+        function loadData() {
+            try {
+                allProperties = JSON.parse(localStorage.getItem(CATALOG_KEY) || '[]');
+            } catch (error) {
+                allProperties = [];
+            }
+
+            if (!allProperties.length) {
+                allProperties = [
+                    { id: 1, title: 'Skyline Prime Residences', location: 'Bandra West, Mumbai', price: 'INR 3.2 Cr', status: 'Ready to Move', image: 'images/mirror-building.jpg' },
+                    { id: 2, title: 'Glassfront Executive Towers', location: 'Gachibowli, Hyderabad', price: 'INR 2.4 Cr', status: 'New Launch', image: 'images/projects-11-free-img.jpg' },
+                    { id: 3, title: 'Parkview Family Villas', location: 'Whitefield, Bengaluru', price: 'INR 1.85 Cr', status: 'Limited Units', image: 'images/projects-10-free-img.jpg' },
+                    { id: 4, title: 'Reflection Heights Apartments', location: 'Noida Sector 150', price: 'INR 98 Lakh', status: 'Possession 2027', image: 'images/projects-09-free-img.jpg' }
+                ];
+                localStorage.setItem(CATALOG_KEY, JSON.stringify(allProperties));
+            }
+
+            try {
+                favouriteIds = new Set(JSON.parse(localStorage.getItem(FAV_KEY) || '[]'));
+            } catch (error) {
+                favouriteIds = new Set();
+            }
+        }
+
+        // Update user display
+        function updateUserDisplay() {
+            document.getElementById('user-name').textContent = 'Guest Buyer';
+            document.getElementById('user-role').textContent = 'Buyer';
+            document.getElementById('user-email').textContent = 'wishlist@krishanrealty.com';
+        }
+
+        // Setup tabs
+        function setupTabs() {
+            const tabs = document.querySelectorAll('.dashboard-tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+
+                    document.querySelectorAll('.tab-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+
+                    document.getElementById(tab.dataset.tab).classList.add('active');
+                });
+            });
+        }
+
+        function renderDashboard() {
+            renderAllProperties();
+            renderFavourites();
+            document.getElementById('total-properties').textContent = allProperties.length;
+            document.getElementById('total-favourites').textContent = favouriteIds.size;
+        }
+
+        function renderAllProperties() {
+            const loading = document.getElementById('properties-loading');
+            const grid = document.getElementById('properties-grid');
+            const empty = document.getElementById('properties-empty');
+
+            grid.innerHTML = '';
+            empty.style.display = 'none';
+
+            loading.style.display = 'none';
+            if (allProperties.length === 0) {
+                empty.style.display = 'block';
+            } else {
+                renderProperties(grid, allProperties, false);
+            }
+        }
+
+        function renderFavourites() {
+            const loading = document.getElementById('favourites-loading');
+            const grid = document.getElementById('favourites-grid');
+            const empty = document.getElementById('favourites-empty');
+
+            grid.innerHTML = '';
+            empty.style.display = 'none';
+
+            const favourites = allProperties.filter(property => favouriteIds.has(property.id));
+            loading.style.display = 'none';
+            document.getElementById('total-favourites').textContent = favourites.length;
+
+            if (favourites.length === 0) {
+                empty.style.display = 'block';
+            } else {
+                renderProperties(grid, favourites, true);
+            }
+        }
+
+        // Render properties
+        function renderProperties(container, properties, isFavouritesTab) {
+            container.innerHTML = properties.map(property => `
+                <div class="property-card" data-id="${property.id}">
+                    <img src="${property.image_url}" alt="${property.title}" class="property-image" onerror="this.src='images/architect-building.jpg'">
+                    <div class="property-content">
+                        <h3 class="property-title">${property.title}</h3>
+                        <div class="property-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            ${property.location}
+                        </div>
+                        <p class="property-description">${property.status || 'Available now'}</p>
+                        <div class="property-price">${property.price || 'Price on request'}</div>
+                        <div class="property-actions">
+                            ${isFavouritesTab ? `
+                                <button class="btn-favourite remove" onclick="removeFavourite(${property.id})">
+                                    <i class="fas fa-heart-broken"></i> Remove
+                                </button>
+                            ` : `
+                                <button class="btn-favourite ${favouriteIds.has(property.id) ? 'remove' : 'add'}" 
+                                        onclick="toggleFavourite(${property.id}, this)"
+                                        id="fav-btn-${property.id}">
+                                    <i class="fas fa-heart"></i>
+                                    ${favouriteIds.has(property.id) ? 'Remove' : 'Add to Favourites'}
+                                </button>
+                            `}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Toggle favourite
+        function toggleFavourite(propertyId, button) {
+            const isFavourite = favouriteIds.has(propertyId);
+
+            if (isFavourite) {
+                favouriteIds.delete(propertyId);
+                button.classList.remove('remove');
+                button.classList.add('add');
+                button.innerHTML = '<i class="fas fa-heart"></i> Add to Favourites';
+                showToast('Removed from favourites', 'success');
+            } else {
+                favouriteIds.add(propertyId);
+                button.classList.remove('add');
+                button.classList.add('remove');
+                button.innerHTML = '<i class="fas fa-heart-broken"></i> Remove';
+                showToast('Added to favourites', 'success');
+            }
+
+            localStorage.setItem(FAV_KEY, JSON.stringify(Array.from(favouriteIds)));
+            renderFavourites();
+        }
+
+        // Remove favourite (from favourites tab)
+        function removeFavourite(propertyId) {
+            favouriteIds.delete(propertyId);
+            localStorage.setItem(FAV_KEY, JSON.stringify(Array.from(favouriteIds)));
+            showToast('Removed from favourites', 'success');
+            renderDashboard();
+
+            const button = document.getElementById(`fav-btn-${propertyId}`);
+            if (button) {
+                button.classList.remove('remove');
+                button.classList.add('add');
+                button.innerHTML = '<i class="fas fa-heart"></i> Add to Favourites';
+            }
+        }
+
+        // Show toast notification
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = `toast ${type} show`;
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Logout
+        function logout() {
+            // Clear all authentication data
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            window.location.href = 'login.html?logout=1';
+        }
+    </script>
+</body>
+</html>
+
+
+
+
