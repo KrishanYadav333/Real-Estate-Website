@@ -1,23 +1,68 @@
-// Profile Menu Toggle - Click to open/close on mobile, auto-hide on blur
+// Profile Menu Toggle - Simplified and robust
 (function() {
   document.addEventListener('DOMContentLoaded', function() {
-    const profileMenuItem = document.getElementById('menu-item-500');
+    const menuItem = document.getElementById('menu-item-500');
     
-    if (!profileMenuItem) {
-      console.log('Profile menu item not found');
+    if (!menuItem) {
+      console.error('Profile menu item #menu-item-500 not found');
       return;
     }
 
-    const profileLink = profileMenuItem.querySelector('.menu-link');
-    const menuToggleBtn = profileMenuItem.querySelector('.ast-menu-toggle');
-    const subMenu = profileMenuItem.querySelector('.sub-menu');
-
-    if (!profileLink || !menuToggleBtn || !subMenu) {
-      console.log('Profile menu elements not found', { profileLink, menuToggleBtn, subMenu });
+    const subMenu = menuItem.querySelector('ul.sub-menu');
+    
+    if (!subMenu) {
+      console.error('Submenu not found in profile menu item');
       return;
     }
 
-    console.log('Profile menu initialized successfully');
+    console.log('Profile menu found and initialized');
+
+    let isOpen = false;
+
+    const openMenu = function() {
+      console.log('[Menu] Opening submenu');
+      subMenu.style.display = 'block';
+      subMenu.style.visibility = 'visible';
+      subMenu.style.opacity = '1';
+      isOpen = true;
+    };
+
+    const closeMenu = function() {
+      console.log('[Menu] Closing submenu');
+      subMenu.style.display = 'none';
+      subMenu.style.visibility = 'hidden';
+      subMenu.style.opacity = '0';
+      isOpen = false;
+    };
+
+    // Initialize menu as closed
+    closeMenu();
+
+    // Handle clicks on the entire menu item to toggle
+    menuItem.addEventListener('click', function(e) {
+      // Prevent the click from bubbling to document
+      e.stopPropagation();
+      
+      // If clicking on menu items inside the submenu, don't toggle
+      if (e.target.closest('.sub-menu a')) {
+        return;
+      }
+
+      console.log('[Menu] Click detected, current state:', isOpen);
+      if (isOpen) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!menuItem.contains(e.target) && isOpen) {
+        console.log('[Menu] Clicked outside, closing');
+        closeMenu();
+      }
+    });
 
     // Detect touch device
     const isTouchDevice = () => {
@@ -26,48 +71,27 @@
               (navigator.msMaxTouchPoints > 0));
     };
 
-    const isTouch = isTouchDevice();
-
-    const openMenu = function() {
-      console.log('Opening menu');
-      subMenu.style.display = 'block';
-    };
-
-    const closeMenu = function() {
-      console.log('Closing menu');
-      subMenu.style.display = 'none';
-    };
-
-    const toggleMenu = function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      console.log('Toggle clicked');
-      if (subMenu.style.display === 'block') {
-        closeMenu();
-      } else {
-        openMenu();
-      }
-    };
-
-    // Click handlers
-    profileLink.addEventListener('click', toggleMenu);
-    if (menuToggleBtn) {
-      menuToggleBtn.addEventListener('click', toggleMenu);
-    }
-
-    // Desktop: Hide menu when cursor leaves (only on non-touch devices)
-    if (!isTouch) {
+    // Desktop: auto-hide on mouse leave
+    if (!isTouchDevice()) {
       let hideTimer;
-      profileMenuItem.addEventListener('mouseleave', function() {
+      menuItem.addEventListener('mouseleave', function() {
         hideTimer = setTimeout(() => {
-          closeMenu();
+          if (isOpen) {
+            console.log('[Menu] Mouse left, auto-closing');
+            closeMenu();
+          }
         }, 300);
       });
 
-      profileMenuItem.addEventListener('mouseenter', function() {
-        if (hideTimer) clearTimeout(hideTimer);
+      menuItem.addEventListener('mouseenter', function() {
+        if (hideTimer) {
+          clearTimeout(hideTimer);
+          hideTimer = null;
+        }
       });
     }
+  });
+})();
 
     // Hide menu when clicking outside
     document.addEventListener('click', function(e) {
