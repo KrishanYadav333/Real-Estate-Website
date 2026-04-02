@@ -56,6 +56,36 @@
     border-bottom-style: solid;
 }
 
+/* Keep only one header variant visible to avoid oversized stacked header area */
+@media (min-width: 922px) {
+    #ast-mobile-header {
+        display: none !important;
+    }
+}
+
+@media (max-width: 921px) {
+    #ast-desktop-header {
+        display: none !important;
+    }
+}
+
+/* Enforce regular navbar height */
+.site-header .ast-main-header-wrap,
+.site-header .main-header-bar-wrap,
+.site-header .ast-primary-header-bar,
+.site-header .site-primary-header-wrap {
+    min-height: 70px !important;
+}
+
+.site-header .main-header-menu > .menu-item,
+.site-header .main-header-menu > .menu-item > .menu-link,
+.site-header .main-header-menu > .menu-item > .ast-menu-toggle {
+    height: 70px !important;
+    line-height: 70px !important;
+    display: flex;
+    align-items: center;
+}
+
 @media (min-width: 922px) {
     .site-header .site-primary-header-wrap.ast-container,
     .site-header .ast-primary-header-bar .ast-container {
