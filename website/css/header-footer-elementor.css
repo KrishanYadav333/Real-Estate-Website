@@ -5,7 +5,7 @@
 /* Restore visual gap between logo and first top-level menu item. */
 @media (min-width: 922px) {
     .site-header .site-header-primary-section-right {
-        padding-left: 36px;
+        padding-left: 0;
     }
 
     .site-header .ast-builder-menu-1 .menu-item > .menu-link {
