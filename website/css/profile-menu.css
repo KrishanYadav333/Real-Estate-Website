@@ -36,6 +36,7 @@
 }
 
 /* When forced open, ALWAYS show regardless of hover state */
+#menu-item-500.profile-menu-force-open > .sub-menu,
 #menu-item-500 .sub-menu.profile-menu-force-open {
   display: block !important;
   visibility: visible !important;
@@ -87,6 +88,7 @@
 
 /* Mobile styles */
 @media (max-width: 921px) {
+  #menu-item-500.profile-menu-force-open > .sub-menu,
   #menu-item-500 .sub-menu.profile-menu-force-open {
     position: fixed;
     right: 10px;
