@@ -57,6 +57,12 @@
 }
 
 @media (min-width: 922px) {
+    .site-header .site-primary-header-wrap.ast-container,
+    .site-header .ast-primary-header-bar .ast-container {
+        width: 100%;
+        max-width: 100%;
+    }
+
     .site-header .main-header-menu > .menu-item {
         line-height: 70px;
     }
@@ -201,6 +207,7 @@
         justify-content: flex-end;
         padding-left: 0;
         max-width: 100%;
+        margin-right: 0;
     }
 
     .site-header .ast-main-header-bar-alignment {
@@ -215,6 +222,11 @@
 
     .site-header .ast-builder-menu-1 .main-header-menu {
         gap: 2px;
+    }
+
+    .site-header .site-header-primary-section-left {
+        padding-left: 0;
+        margin-right: auto;
     }
 
     .site-header #ast-desktop-header {
