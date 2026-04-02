@@ -49,6 +49,9 @@
         menuItem.classList.add('profile-menu-force-open');
         subMenu.classList.add('profile-menu-force-open');
         toggleBtn.setAttribute('aria-expanded', 'true');
+        if (isMobileViewport()) {
+          menuItem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
         window.requestAnimationFrame(placeMobileMenu);
       }
 
