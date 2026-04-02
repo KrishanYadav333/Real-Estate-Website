@@ -49,6 +49,13 @@
         menuItem.classList.add('profile-menu-force-open');
         subMenu.classList.add('profile-menu-force-open');
         toggleBtn.setAttribute('aria-expanded', 'true');
+        
+        // Ensure dropdown is visible with inline styles as backup
+        subMenu.style.display = 'block';
+        subMenu.style.visibility = 'visible';
+        subMenu.style.opacity = '1';
+        subMenu.style.pointerEvents = 'auto';
+        
         if (isMobileViewport()) {
           menuItem.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
@@ -59,6 +66,13 @@
         menuItem.classList.remove('profile-menu-force-open');
         subMenu.classList.remove('profile-menu-force-open');
         toggleBtn.setAttribute('aria-expanded', 'false');
+        
+        // Clear inline styles to let CSS take over
+        subMenu.style.display = '';
+        subMenu.style.visibility = '';
+        subMenu.style.opacity = '';
+        subMenu.style.pointerEvents = '';
+        
         if (isMobileViewport()) {
           subMenu.style.top = '';
           subMenu.style.left = '';

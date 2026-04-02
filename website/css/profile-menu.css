@@ -49,18 +49,21 @@
   visibility: visible !important;
   opacity: 1 !important;
   pointer-events: auto !important;
-  position: absolute;
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  z-index: 10000;
-  top: 100%;
-  right: 0;
-  min-width: 180px;
-  padding: 8px 0;
-  margin-top: 4px;
-  list-style: none;
+  position: absolute !important;
+  background: white !important;
+  border: 1px solid #ddd !important;
+  border-radius: 4px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  z-index: 99999 !important;
+  top: 100% !important;
+  right: 0 !important;
+  left: auto !important;
+  min-width: 180px !important;
+  padding: 8px 0 !important;
+  margin-top: 4px !important;
+  list-style: none !important;
+  width: auto !important;
+  max-width: none !important;
 }
 
 /* Menu items styling */
