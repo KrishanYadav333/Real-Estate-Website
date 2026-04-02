@@ -58,10 +58,20 @@
       }
     });
 
+    subMenu.addEventListener('click', function (e) {
+      e.stopPropagation();
+    });
+
     subMenu.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', function () {
+      a.addEventListener('click', function (e) {
+        var href = a.getAttribute('href');
+        e.preventDefault();
+        e.stopPropagation();
         closeMenu();
-      });
+        if (href && href !== '#') {
+          window.location.href = href;
+        }
+      }, true);
     });
   }
 

@@ -41,6 +41,7 @@
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
+  pointer-events: auto !important;
   position: absolute;
   background: white;
   border: 1px solid #ddd;
