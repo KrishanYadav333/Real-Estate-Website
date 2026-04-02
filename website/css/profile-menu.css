@@ -1,86 +1,132 @@
-/* Profile Menu Dropdown Styling */
+/* Profile Menu - Absolutely bulletproof styling */
+
 #menu-item-500 {
-  position: relative;
+  position: relative !important;
+  display: inline-block !important;
 }
 
 #menu-item-500 .menu-link {
   display: flex !important;
   align-items: center !important;
-  gap: 4px;
-  cursor: pointer;
-  user-select: none;
-  padding: 8px 12px !important;
+  justify-content: center !important;
+  gap: 4px !important;
+  cursor: pointer !important;
+  user-select: none !important;
+  padding: 5px 10px !important;
+  margin: 0 !important;
+}
+
+#menu-item-500 .menu-link svg {
+  display: block !important;
+  width: 18px !important;
+  height: 18px !important;
+  flex-shrink: 0 !important;
 }
 
 #menu-item-500 .ast-menu-toggle {
-  cursor: pointer;
+  cursor: pointer !important;
   background: none !important;
   border: none !important;
   padding: 0 4px !important;
   margin: 0 !important;
   display: inline-flex !important;
   align-items: center !important;
-  width: 18px;
-  height: 18px;
-  flex-shrink: 0;
+  justify-content: center !important;
+  width: 18px !important;
+  height: 18px !important;
+  flex-shrink: 0 !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+#menu-item-500 .ast-menu-toggle:focus {
+  outline: 2px solid #da2128 !important;
+  outline-offset: 2px !important;
+}
+
+#menu-item-500 .ast-menu-toggle:hover {
+  opacity: 0.8 !important;
 }
 
 #menu-item-500 .sub-menu {
   position: absolute !important;
-  background: white !important;
+  background-color: white !important;
   border: 1px solid #ddd !important;
-  border-radius: 4px;
+  border-radius: 4px !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
   z-index: 10000 !important;
-  top: 100% !important;
+  top: calc(100% + 4px) !important;
   right: 0 !important;
-  min-width: 160px;
-  padding: 6px 0 !important;
-  margin-top: 4px;
+  left: auto !important;
+  min-width: 180px !important;
+  width: 180px !important;
+  padding: 8px 0 !important;
+  margin: 0 !important;
   list-style: none !important;
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
-  transition: opacity 0.2s ease, visibility 0.2s ease;
+  transition: opacity 0.2s ease, visibility 0.2s ease !important;
+  pointer-events: none !important;
 }
 
-/* Open state */
-#menu-item-500 .sub-menu.profile-menu-open {
+/* When open - override everything */
+#menu-item-500 .sub-menu[style*="display: block"] {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
+  pointer-events: auto !important;
 }
 
 #menu-item-500 .sub-menu li {
   list-style: none !important;
   padding: 0 !important;
   margin: 0 !important;
+  display: block !important;
 }
 
 #menu-item-500 .sub-menu li a {
   display: block !important;
-  padding: 8px 16px !important;
+  padding: 10px 16px !important;
+  margin: 0 !important;
   color: #333 !important;
+  background-color: white !important;
   text-decoration: none !important;
-  font-size: 14px;
-  white-space: nowrap;
-  transition: all 0.2s ease;
+  font-size: 14px !important;
+  font-weight: normal !important;
+  white-space: nowrap !important;
+  border: none !important;
+  transition: all 0.2s ease !important;
+  cursor: pointer !important;
+  line-height: 1.5 !important;
+}
+
+#menu-item-500 .sub-menu li:first-child a {
+  border-radius: 4px 4px 0 0 !important;
+}
+
+#menu-item-500 .sub-menu li:last-child a {
+  border-radius: 0 0 4px 4px !important;
 }
 
 #menu-item-500 .sub-menu li a:hover,
 #menu-item-500 .sub-menu li a:focus {
   background-color: #f5f5f5 !important;
   color: #da2128 !important;
-  padding-left: 20px;
+  padding-left: 20px !important;
 }
 
-/* Mobile responsiveness */
+/* Mobile styles */
 @media (max-width: 921px) {
   #menu-item-500 .sub-menu {
     position: fixed !important;
     right: 10px !important;
     left: auto !important;
-    transform: none !important;
-    margin-top: 8px;
+    top: auto !important;
+    bottom: auto !important;
+    width: 160px !important;
+    min-width: 160px !important;
   }
 }

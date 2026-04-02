@@ -1,118 +1,116 @@
-// Profile Menu Toggle - Direct approach targeting Astra menu
+// Profile Menu Toggle - Override Astra menu completely
 (function() {
-  document.addEventListener('DOMContentLoaded', function() {
+  console.log('[ProfileMenu] Script loaded');
+  
+  function initProfileMenu() {
     const menuItem = document.getElementById('menu-item-500');
     
     if (!menuItem) {
-      console.error('[ProfileMenu] ERROR: #menu-item-500 not found');
-      return;
+      console.error('[ProfileMenu] ERROR: menu-item-500 not found');
+      console.log('[ProfileMenu] Available menu items:', document.querySelectorAll('[id*="menu-item"]').length);
+      return false;
     }
 
     const subMenu = menuItem.querySelector('ul.sub-menu');
     const toggleBtn = menuItem.querySelector('.ast-menu-toggle');
+    const menuLink = menuItem.querySelector('.menu-link');
+    
+    console.log('[ProfileMenu] Elements found:', { subMenu: !!subMenu, toggleBtn: !!toggleBtn, menuLink: !!menuLink });
     
     if (!subMenu) {
-      console.error('[ProfileMenu] ERROR: .sub-menu not found');
-      return;
+      console.error('[ProfileMenu] ERROR: sub-menu not found');
+      return false;
     }
 
-    console.log('[ProfileMenu] Initialized - element found');
-
-    // Force initial state
-    subMenu.classList.remove('profile-menu-open');
-    subMenu.style.display = 'none !important';
-
-    const openMenu = function() {
-      console.log('[ProfileMenu] OPENING menu');
-      subMenu.classList.add('profile-menu-open');
-      subMenu.style.display = 'block !important';
-      subMenu.style.visibility = 'visible !important';
-      subMenu.style.opacity = '1 !important';
-      if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'true');
-    };
-
-    const closeMenu = function() {
-      console.log('[ProfileMenu] CLOSING menu');
-      subMenu.classList.remove('profile-menu-open');
-      subMenu.style.display = 'none !important';
-      subMenu.style.visibility = 'hidden !important';
-      subMenu.style.opacity = '0 !important';
-      if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false');
-    };
-
-    // Click handler on button specifically
-    if (toggleBtn) {
-      toggleBtn.addEventListener('click', function(e) {
-        console.log('[ProfileMenu] Toggle button clicked');
-        e.preventDefault();
-        e.stopPropagation();
-        
-        if (subMenu.classList.contains('profile-menu-open')) {
-          closeMenu();
-        } else {
-          openMenu();
-        }
-      });
+    // Remove any existing click handlers from Astra
+    const newToggleBtn = toggleBtn.cloneNode(true);
+    if (toggleBtn.parentNode) {
+      toggleBtn.parentNode.replaceChild(newToggleBtn, toggleBtn);
     }
 
-    // Also handle clicks on the menu-link
-    const menuLink = menuItem.querySelector('.menu-link');
+    // Reset submenu initial state
+    subMenu.style.cssText = 'display:none !important; visibility:hidden !important; opacity:0 !important;';
+    newToggleBtn.setAttribute('aria-expanded', 'false');
+
+    console.log('[ProfileMenu] Initialized successfully');
+
+    // CRITICAL: Click handler on toggle button
+    newToggleBtn.addEventListener('click', function(e) {
+      console.log('[ProfileMenu] *** TOGGLE BUTTON CLICKED ***');
+      e.preventDefault();
+      e.stopPropagation();
+      
+      const isOpen = subMenu.style.display === 'block';
+      console.log('[ProfileMenu] Current state: ' + (isOpen ? 'OPEN' : 'CLOSED'));
+      
+      if (isOpen) {
+        console.log('[ProfileMenu] -> CLOSING');
+        subMenu.style.cssText = 'display:none !important; visibility:hidden !important; opacity:0 !important;';
+        newToggleBtn.setAttribute('aria-expanded', 'false');
+      } else {
+        console.log('[ProfileMenu] -> OPENING');
+        subMenu.style.cssText = 'display:block !important; visibility:visible !important; opacity:1 !important;';
+        newToggleBtn.setAttribute('aria-expanded', 'true');
+      }
+    }, true); // Use capture phase
+
+    // Also handle menu link clicks
     if (menuLink) {
       menuLink.addEventListener('click', function(e) {
-        // Don't toggle if it's just a normal link click
-        if (this.href && this.href !== '#') {
-          return;
+        if (this.getAttribute('href') === '#') {
+          console.log('[ProfileMenu] Menu link clicked (# href)');
+          e.preventDefault();
+          e.stopPropagation();
+          newToggleBtn.click();
         }
-        
-        console.log('[ProfileMenu] Menu link clicked');
-        e.preventDefault();
-        e.stopPropagation();
-        
-        if (subMenu.classList.contains('profile-menu-open')) {
-          closeMenu();
-        } else {
-          openMenu();
-        }
-      });
+      }, true);
     }
 
     // Close when clicking outside
     document.addEventListener('click', function(e) {
-      if (!menuItem.contains(e.target)) {
-        console.log('[ProfileMenu] Click outside detected, closing');
-        closeMenu();
+      if (!menuItem.contains(e.target) && subMenu.style.display === 'block') {
+        console.log('[ProfileMenu] Outside click detected, closing');
+        subMenu.style.cssText = 'display:none !important; visibility:hidden !important; opacity:0 !important;';
+        newToggleBtn.setAttribute('aria-expanded', 'false');
       }
     });
 
-    // Close submenu item clicks
-    subMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', function() {
-        console.log('[ProfileMenu] Submenu item clicked, closing menu');
-        closeMenu();
+    // Close on submenu item clicks
+    subMenu.querySelectorAll('li a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        console.log('[ProfileMenu] Submenu item clicked:', this.textContent);
+        setTimeout(() => {
+          subMenu.style.cssText = 'display:none !important; visibility:hidden !important; opacity:0 !important;';
+          newToggleBtn.setAttribute('aria-expanded', 'false');
+        }, 100);
       });
     });
 
-    // Detect touch vs desktop
-    const isTouchDevice = () => {
-      return (('ontouchstart' in window) || 
-              (navigator.maxTouchPoints > 0) ||
-              (navigator.msMaxTouchPoints > 0));
-    };
+    console.log('[ProfileMenu] All handlers attached');
+    return true;
+  }
 
-    // Desktop: auto-hide on hover out
-    if (!isTouchDevice()) {
-      menuItem.addEventListener('mouseleave', function() {
+  // Try immediately
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('[ProfileMenu] DOMContentLoaded fired');
+      if (!initProfileMenu()) {
+        // Retry after a delay if not found
         setTimeout(() => {
-          if (subMenu.classList.contains('profile-menu-open')) {
-            console.log('[ProfileMenu] Mouse left, auto-closing');
-            closeMenu();
-          }
-        }, 200);
-      });
+          console.log('[ProfileMenu] Retrying initialization...');
+          initProfileMenu();
+        }, 500);
+      }
+    });
+  } else {
+    console.log('[ProfileMenu] DOM already loaded');
+    if (!initProfileMenu()) {
+      setTimeout(() => {
+        console.log('[ProfileMenu] Retrying initialization...');
+        initProfileMenu();
+      }, 500);
     }
-
-    console.log('[ProfileMenu] All event listeners attached');
-  });
+  }
 })();
 })();
   });
