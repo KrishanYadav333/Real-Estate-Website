@@ -1,123 +1,119 @@
-// Profile Menu Toggle - Simplified and robust
+// Profile Menu Toggle - Direct approach targeting Astra menu
 (function() {
   document.addEventListener('DOMContentLoaded', function() {
     const menuItem = document.getElementById('menu-item-500');
     
     if (!menuItem) {
-      console.error('Profile menu item #menu-item-500 not found');
+      console.error('[ProfileMenu] ERROR: #menu-item-500 not found');
       return;
     }
 
     const subMenu = menuItem.querySelector('ul.sub-menu');
+    const toggleBtn = menuItem.querySelector('.ast-menu-toggle');
     
     if (!subMenu) {
-      console.error('Submenu not found in profile menu item');
+      console.error('[ProfileMenu] ERROR: .sub-menu not found');
       return;
     }
 
-    console.log('Profile menu found and initialized');
+    console.log('[ProfileMenu] Initialized - element found');
 
-    let isOpen = false;
+    // Force initial state
+    subMenu.classList.remove('profile-menu-open');
+    subMenu.style.display = 'none !important';
 
     const openMenu = function() {
-      console.log('[Menu] Opening submenu');
-      subMenu.style.display = 'block';
-      subMenu.style.visibility = 'visible';
-      subMenu.style.opacity = '1';
-      isOpen = true;
+      console.log('[ProfileMenu] OPENING menu');
+      subMenu.classList.add('profile-menu-open');
+      subMenu.style.display = 'block !important';
+      subMenu.style.visibility = 'visible !important';
+      subMenu.style.opacity = '1 !important';
+      if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'true');
     };
 
     const closeMenu = function() {
-      console.log('[Menu] Closing submenu');
-      subMenu.style.display = 'none';
-      subMenu.style.visibility = 'hidden';
-      subMenu.style.opacity = '0';
-      isOpen = false;
+      console.log('[ProfileMenu] CLOSING menu');
+      subMenu.classList.remove('profile-menu-open');
+      subMenu.style.display = 'none !important';
+      subMenu.style.visibility = 'hidden !important';
+      subMenu.style.opacity = '0 !important';
+      if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false');
     };
 
-    // Initialize menu as closed
-    closeMenu();
+    // Click handler on button specifically
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', function(e) {
+        console.log('[ProfileMenu] Toggle button clicked');
+        e.preventDefault();
+        e.stopPropagation();
+        
+        if (subMenu.classList.contains('profile-menu-open')) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      });
+    }
 
-    // Handle clicks on the entire menu item to toggle
-    menuItem.addEventListener('click', function(e) {
-      // Prevent the click from bubbling to document
-      e.stopPropagation();
-      
-      // If clicking on menu items inside the submenu, don't toggle
-      if (e.target.closest('.sub-menu a')) {
-        return;
-      }
+    // Also handle clicks on the menu-link
+    const menuLink = menuItem.querySelector('.menu-link');
+    if (menuLink) {
+      menuLink.addEventListener('click', function(e) {
+        // Don't toggle if it's just a normal link click
+        if (this.href && this.href !== '#') {
+          return;
+        }
+        
+        console.log('[ProfileMenu] Menu link clicked');
+        e.preventDefault();
+        e.stopPropagation();
+        
+        if (subMenu.classList.contains('profile-menu-open')) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      });
+    }
 
-      console.log('[Menu] Click detected, current state:', isOpen);
-      if (isOpen) {
-        closeMenu();
-      } else {
-        openMenu();
-      }
-    });
-
-    // Close menu when clicking outside
+    // Close when clicking outside
     document.addEventListener('click', function(e) {
-      if (!menuItem.contains(e.target) && isOpen) {
-        console.log('[Menu] Clicked outside, closing');
+      if (!menuItem.contains(e.target)) {
+        console.log('[ProfileMenu] Click outside detected, closing');
         closeMenu();
       }
     });
 
-    // Detect touch device
+    // Close submenu item clicks
+    subMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', function() {
+        console.log('[ProfileMenu] Submenu item clicked, closing menu');
+        closeMenu();
+      });
+    });
+
+    // Detect touch vs desktop
     const isTouchDevice = () => {
-      return (('ontouchstart' in window) ||
+      return (('ontouchstart' in window) || 
               (navigator.maxTouchPoints > 0) ||
               (navigator.msMaxTouchPoints > 0));
     };
 
-    // Desktop: auto-hide on mouse leave
+    // Desktop: auto-hide on hover out
     if (!isTouchDevice()) {
-      let hideTimer;
       menuItem.addEventListener('mouseleave', function() {
-        hideTimer = setTimeout(() => {
-          if (isOpen) {
-            console.log('[Menu] Mouse left, auto-closing');
+        setTimeout(() => {
+          if (subMenu.classList.contains('profile-menu-open')) {
+            console.log('[ProfileMenu] Mouse left, auto-closing');
             closeMenu();
           }
-        }, 300);
-      });
-
-      menuItem.addEventListener('mouseenter', function() {
-        if (hideTimer) {
-          clearTimeout(hideTimer);
-          hideTimer = null;
-        }
+        }, 200);
       });
     }
+
+    console.log('[ProfileMenu] All event listeners attached');
   });
 })();
-
-    // Hide menu when clicking outside
-    document.addEventListener('click', function(e) {
-      if (!profileMenuItem.contains(e.target) && subMenu.style.display === 'block') {
-        closeMenu();
-      }
-    });
-
-    // Handle submenu link clicks
-    subMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.stopPropagation();
-        setTimeout(() => {
-          closeMenu();
-        }, 100);
-      });
-    });
-  });
-})();
-        // Close menu after a brief delay
-        setTimeout(() => {
-          closeMenu();
-        }, 300);
-      });
-    });
-  });
 })();
   });
 })();
