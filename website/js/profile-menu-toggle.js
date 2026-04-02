@@ -41,29 +41,18 @@
           subMenu.style.maxHeight = '';
           return;
         }
-
-        var anchorRect = menuItem.getBoundingClientRect();
         var vw = window.innerWidth;
         var vh = window.innerHeight;
-        var menuWidth = Math.min(Math.max(subMenu.offsetWidth || 180, 180), vw - 16);
-        var menuHeight = subMenu.offsetHeight || 180;
-
-        var left = anchorRect.right - menuWidth;
-        left = Math.max(8, Math.min(left, vw - menuWidth - 8));
-
-        var top = anchorRect.bottom + 8;
-        if (top + menuHeight > vh - 8) {
-          top = Math.max(8, anchorRect.top - menuHeight - 8);
-        }
+        var menuWidth = Math.min(220, vw - 16);
+        var safeTop = 72;
+        var safeMaxHeight = Math.max(140, vh - safeTop - 8);
 
         subMenu.style.position = 'fixed';
-        subMenu.style.left = left + 'px';
-        subMenu.style.top = top + 'px';
-        subMenu.style.right = 'auto';
+        subMenu.style.left = 'auto';
+        subMenu.style.right = '8px';
+        subMenu.style.top = safeTop + 'px';
         subMenu.style.width = menuWidth + 'px';
-        subMenu.style.maxHeight = Math.max(140, vh - 16) + 'px';
-
-        menuItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        subMenu.style.maxHeight = safeMaxHeight + 'px';
       }
 
       function openMenu() {
