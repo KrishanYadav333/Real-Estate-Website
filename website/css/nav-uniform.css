@@ -187,6 +187,7 @@
 @media (min-width: 922px) {
     .site-header .site-primary-header-wrap .ast-builder-grid-row {
         grid-template-columns: 1fr auto;
+        align-items: center;
     }
 
     .site-header .site-header-primary-section-left {
@@ -198,7 +199,8 @@
         justify-self: end;
         margin-left: 0;
         justify-content: flex-end;
-        padding-left: 657px;
+        padding-left: 0;
+        max-width: 100%;
     }
 
     .site-header .ast-main-header-bar-alignment {
@@ -211,6 +213,10 @@
         justify-content: flex-end;
     }
 
+    .site-header .ast-builder-menu-1 .main-header-menu {
+        gap: 2px;
+    }
+
     .site-header #ast-desktop-header {
         display: block !important;
     }
@@ -220,8 +226,8 @@
     }
 
     .site-header #ast-desktop-header .main-header-menu > .menu-item > .menu-link {
-        padding-left: 22px !important;
-        padding-right: 22px !important;
+        padding-left: 14px !important;
+        padding-right: 14px !important;
     }
 
     .site-header #ast-desktop-header .main-header-menu .menu-item-has-children > .sub-menu {
