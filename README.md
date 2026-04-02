@@ -61,6 +61,35 @@ buyer-portal/
    - Dashboard: http://localhost:3000/dashboard
    - Original website: http://localhost:3000
 
+## Deploy To Render
+
+### Option 1: Blueprint (recommended)
+
+1. Push this repository to GitHub.
+2. In Render, click **New +** -> **Blueprint**.
+3. Select this repository. Render will detect `render.yaml`.
+4. Deploy. Render will automatically set:
+  - `NODE_ENV=production`
+  - `JWT_SECRET` (generated)
+  - `DB_PATH=buyer_portal.db`
+
+### Option 2: Manual Web Service
+
+1. In Render, create a **Web Service** from this repo.
+2. Use:
+  - Build command: `npm install`
+  - Start command: `npm start`
+3. Add env var:
+  - `JWT_SECRET` = a strong random secret
+4. Health check path:
+  - `/healthz`
+
+### Important Note About SQLite On Render
+
+- This app uses SQLite (`better-sqlite3`).
+- Without a persistent disk, database data can reset on redeploy/restart.
+- For persistent data, mount a persistent disk and set `DB_PATH` to that mounted location.
+
 ## API Endpoints
 
 ### Authentication

@@ -9,6 +9,7 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
+const DB_PATH = process.env.DB_PATH || 'buyer_portal.db';
 
 // Middleware
 app.use(cors());
@@ -17,7 +18,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('website'));
 
 // Database setup
-const db = new Database('buyer_portal.db');
+const db = new Database(DB_PATH);
+
+// Lightweight health endpoint for Render health checks
+app.get('/healthz', (req, res) => {
+  res.status(200).json({ ok: true });
+});
 
 // Create tables
 db.exec(`
