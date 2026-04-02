@@ -2,6 +2,18 @@
     width: 100%;
 }
 
+/* Restore visual gap between logo and first top-level menu item. */
+@media (min-width: 922px) {
+    .site-header .site-header-primary-section-right {
+        padding-left: 36px;
+    }
+
+    .site-header .ast-builder-menu-1 .menu-item > .menu-link {
+        padding-left: 28px !important;
+        padding-right: 28px !important;
+    }
+}
+
 /* Container fix for genesis themes */
 
 .ehf-template-genesis.ehf-header .site-header .wrap,
