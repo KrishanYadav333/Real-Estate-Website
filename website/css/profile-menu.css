@@ -1,16 +1,21 @@
-/* Profile Menu - Override Astra hover behavior */
+/* Profile Menu - Align with other menu buttons */
 
 #menu-item-500 {
   position: relative;
+  display: inline-flex;
+  align-items: center;
 }
 
 #menu-item-500 .menu-link {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 4px;
   cursor: pointer;
   user-select: none;
+  line-height: 2em;
+  height: 100%;
+  padding: 0 12px;
 }
 
 #menu-item-500 .ast-menu-toggle {
@@ -22,9 +27,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   flex-shrink: 0;
+  line-height: 2em;
 }
 
 #menu-item-500 .sub-menu {
