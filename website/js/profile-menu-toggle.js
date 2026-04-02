@@ -11,44 +11,70 @@
 
     if (!menuToggleBtn || !subMenu) return;
 
-    // Toggle submenu on click
-    profileLink.addEventListener('click', function(e) {
-      e.preventDefault();
-      const isExpanded = menuToggleBtn.getAttribute('aria-expanded') === 'true';
-      menuToggleBtn.setAttribute('aria-expanded', !isExpanded);
-      subMenu.style.display = isExpanded ? 'none' : 'block';
-    });
+    // Detect touch device
+    const isTouchDevice = () => {
+      return (('ontouchstart' in window) ||
+              (navigator.maxTouchPoints > 0) ||
+              (navigator.msMaxTouchPoints > 0));
+    };
 
-    // Also handle the toggle button click directly
-    menuToggleBtn.addEventListener('click', function(e) {
-      e.preventDefault();
-      const isExpanded = this.getAttribute('aria-expanded') === 'true';
-      this.setAttribute('aria-expanded', !isExpanded);
-      subMenu.style.display = isExpanded ? 'none' : 'block';
-    });
+    const openMenu = function() {
+      menuToggleBtn.setAttribute('aria-expanded', 'true');
+      subMenu.classList.add('show');
+    };
 
-    // Hide menu when cursor leaves the menu item
-    profileMenuItem.addEventListener('mouseleave', function() {
+    const closeMenu = function() {
       menuToggleBtn.setAttribute('aria-expanded', 'false');
-      subMenu.style.display = 'none';
-    });
+      subMenu.classList.remove('show');
+    };
+
+    const toggleMenu = function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const isExpanded = menuToggleBtn.getAttribute('aria-expanded') === 'true';
+      if (isExpanded) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    };
+
+    profileLink.addEventListener('click', toggleMenu);
+    menuToggleBtn.addEventListener('click', toggleMenu);
+
+    // Desktop: Hide menu when cursor leaves the menu item (only on non-touch devices)
+    if (!isTouchDevice()) {
+      let hideTimer;
+      profileMenuItem.addEventListener('mouseleave', function() {
+        hideTimer = setTimeout(() => {
+          closeMenu();
+        }, 200);
+      });
+
+      profileMenuItem.addEventListener('mouseenter', function() {
+        if (hideTimer) clearTimeout(hideTimer);
+      });
+    }
 
     // Hide menu when clicking outside
     document.addEventListener('click', function(e) {
       if (!profileMenuItem.contains(e.target)) {
-        menuToggleBtn.setAttribute('aria-expanded', 'false');
-        subMenu.style.display = 'none';
+        closeMenu();
       }
     });
 
-    // Allow touch/click on subMenu items without closing
+    // Handle submenu link clicks - close menu after navigation
     subMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', function() {
+      link.addEventListener('click', function(e) {
+        // Allow the link to navigate
+        e.stopPropagation();
+        // Close menu after a brief delay
         setTimeout(() => {
-          menuToggleBtn.setAttribute('aria-expanded', 'false');
-          subMenu.style.display = 'none';
-        }, 200);
+          closeMenu();
+        }, 300);
       });
     });
+  });
+})();
   });
 })();
