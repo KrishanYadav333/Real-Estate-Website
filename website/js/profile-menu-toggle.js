@@ -3,13 +3,21 @@
   document.addEventListener('DOMContentLoaded', function() {
     const profileMenuItem = document.getElementById('menu-item-500');
     
-    if (!profileMenuItem) return;
+    if (!profileMenuItem) {
+      console.log('Profile menu item not found');
+      return;
+    }
 
     const profileLink = profileMenuItem.querySelector('.menu-link');
     const menuToggleBtn = profileMenuItem.querySelector('.ast-menu-toggle');
     const subMenu = profileMenuItem.querySelector('.sub-menu');
 
-    if (!menuToggleBtn || !subMenu) return;
+    if (!profileLink || !menuToggleBtn || !subMenu) {
+      console.log('Profile menu elements not found', { profileLink, menuToggleBtn, subMenu });
+      return;
+    }
+
+    console.log('Profile menu initialized successfully');
 
     // Detect touch device
     const isTouchDevice = () => {
@@ -18,37 +26,42 @@
               (navigator.msMaxTouchPoints > 0));
     };
 
+    const isTouch = isTouchDevice();
+
     const openMenu = function() {
-      menuToggleBtn.setAttribute('aria-expanded', 'true');
-      subMenu.classList.add('show');
+      console.log('Opening menu');
+      subMenu.style.display = 'block';
     };
 
     const closeMenu = function() {
-      menuToggleBtn.setAttribute('aria-expanded', 'false');
-      subMenu.classList.remove('show');
+      console.log('Closing menu');
+      subMenu.style.display = 'none';
     };
 
     const toggleMenu = function(e) {
       e.preventDefault();
       e.stopPropagation();
-      const isExpanded = menuToggleBtn.getAttribute('aria-expanded') === 'true';
-      if (isExpanded) {
+      console.log('Toggle clicked');
+      if (subMenu.style.display === 'block') {
         closeMenu();
       } else {
         openMenu();
       }
     };
 
+    // Click handlers
     profileLink.addEventListener('click', toggleMenu);
-    menuToggleBtn.addEventListener('click', toggleMenu);
+    if (menuToggleBtn) {
+      menuToggleBtn.addEventListener('click', toggleMenu);
+    }
 
-    // Desktop: Hide menu when cursor leaves the menu item (only on non-touch devices)
-    if (!isTouchDevice()) {
+    // Desktop: Hide menu when cursor leaves (only on non-touch devices)
+    if (!isTouch) {
       let hideTimer;
       profileMenuItem.addEventListener('mouseleave', function() {
         hideTimer = setTimeout(() => {
           closeMenu();
-        }, 200);
+        }, 300);
       });
 
       profileMenuItem.addEventListener('mouseenter', function() {
@@ -58,16 +71,22 @@
 
     // Hide menu when clicking outside
     document.addEventListener('click', function(e) {
-      if (!profileMenuItem.contains(e.target)) {
+      if (!profileMenuItem.contains(e.target) && subMenu.style.display === 'block') {
         closeMenu();
       }
     });
 
-    // Handle submenu link clicks - close menu after navigation
+    // Handle submenu link clicks
     subMenu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', function(e) {
-        // Allow the link to navigate
         e.stopPropagation();
+        setTimeout(() => {
+          closeMenu();
+        }, 100);
+      });
+    });
+  });
+})();
         // Close menu after a brief delay
         setTimeout(() => {
           closeMenu();
