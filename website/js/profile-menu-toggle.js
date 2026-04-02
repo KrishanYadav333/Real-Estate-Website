@@ -32,6 +32,8 @@
       }
 
       function placeMobileMenu() {
+        // On mobile, CSS media query handles positioning with !important
+        // Just ensure the element is rendered properly
         if (!isMobileViewport()) {
           subMenu.style.position = '';
           subMenu.style.top = '';
@@ -39,20 +41,7 @@
           subMenu.style.right = '';
           subMenu.style.width = '';
           subMenu.style.maxHeight = '';
-          return;
         }
-        var vw = window.innerWidth;
-        var vh = window.innerHeight;
-        var menuWidth = Math.min(220, vw - 16);
-        var safeTop = 72;
-        var safeMaxHeight = Math.max(140, vh - safeTop - 8);
-
-        subMenu.style.position = 'fixed';
-        subMenu.style.left = 'auto';
-        subMenu.style.right = '8px';
-        subMenu.style.top = safeTop + 'px';
-        subMenu.style.width = menuWidth + 'px';
-        subMenu.style.maxHeight = safeMaxHeight + 'px';
       }
 
       function openMenu() {

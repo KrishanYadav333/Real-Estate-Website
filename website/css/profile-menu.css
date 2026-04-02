@@ -98,6 +98,22 @@
   padding-left: 20px;
 }
 
+/* Mobile viewport: ensure fixed positioning for dropdown */
+@media (max-width: 921px) {
+  #menu-item-500.profile-menu-force-open > .sub-menu,
+  #menu-item-500 .sub-menu.profile-menu-force-open,
+  .menu-item-500.profile-menu-force-open > .sub-menu,
+  .menu-item-500 .sub-menu.profile-menu-force-open {
+    position: fixed !important;
+    top: auto !important;
+    right: 8px !important;
+    bottom: auto !important;
+    left: auto !important;
+    max-height: calc(100vh - 90px) !important;
+    overflow-y: auto !important;
+  }
+}
+
 /* Mobile styles */
 @media (max-width: 921px) {
   #menu-item-500.profile-menu-force-open > .sub-menu,
