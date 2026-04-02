@@ -1,114 +1,153 @@
-// Profile Menu Toggle - Override Astra menu completely
+// Profile Menu Toggle - Inline styles approach
 (function() {
-  console.log('[ProfileMenu] Script loaded');
+  console.log('[Menu] Script starting...');
   
-  function initProfileMenu() {
-    const menuItem = document.getElementById('menu-item-500');
-    
-    if (!menuItem) {
-      console.error('[ProfileMenu] ERROR: menu-item-500 not found');
-      console.log('[ProfileMenu] Available menu items:', document.querySelectorAll('[id*="menu-item"]').length);
+  function setupMenu() {
+    const item = document.getElementById('menu-item-500');
+    if (!item) {
+      console.error('[Menu] #menu-item-500 NOT FOUND!');
       return false;
     }
-
-    const subMenu = menuItem.querySelector('ul.sub-menu');
-    const toggleBtn = menuItem.querySelector('.ast-menu-toggle');
-    const menuLink = menuItem.querySelector('.menu-link');
     
-    console.log('[ProfileMenu] Elements found:', { subMenu: !!subMenu, toggleBtn: !!toggleBtn, menuLink: !!menuLink });
-    
-    if (!subMenu) {
-      console.error('[ProfileMenu] ERROR: sub-menu not found');
+    const submenu = item.querySelector('.sub-menu');
+    if (!submenu) {
+      console.error('[Menu] .sub-menu NOT FOUND inside menu-item-500!');
+      console.log('[Menu] Available classes:', item.className);
       return false;
     }
-
-    // Remove any existing click handlers from Astra
-    const newToggleBtn = toggleBtn.cloneNode(true);
-    if (toggleBtn.parentNode) {
-      toggleBtn.parentNode.replaceChild(newToggleBtn, toggleBtn);
+    
+    console.log('[Menu] Elements found! Setting up...');
+    
+    // Force submenu hidden initially with inline styles
+    submenu.setAttribute('style', 'position: absolute; background: white; border: 1px solid #ddd; border-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 10000; top: 100%; right: 0; min-width: 180px; padding: 8px 0; margin: 0; list-style: none; display: none !important; visibility: hidden !important; opacity: 0 !important;');
+    
+    // Style the menu items
+    submenu.querySelectorAll('li').forEach(li => {
+      li.style.listStyle = 'none';
+      li.style.padding = '0';
+      li.style.margin = '0';
+      
+      const link = li.querySelector('a');
+      if (link) {
+        link.style.display = 'block';
+        link.style.padding = '10px 16px';
+        link.style.color = '#333';
+        link.style.backgroundColor = 'white';
+        link.style.textDecoration = 'none';
+        link.style.fontSize = '14px';
+        link.style.whiteSpace = 'nowrap';
+        link.style.cursor = 'pointer';
+        link.style.border = 'none';
+        link.style.transition = 'all 0.2s ease';
+        link.style.lineHeight = '1.5';
+        
+        link.addEventListener('mouseenter', function() {
+          this.style.backgroundColor = '#f5f5f5';
+          this.style.color = '#da2128';
+          this.style.paddingLeft = '20px';
+        });
+        
+        link.addEventListener('mouseleave', function() {
+          this.style.backgroundColor = 'white';
+          this.style.color = '#333';
+          this.style.paddingLeft = '16px';
+        });
+      }
+    });
+    
+    // Find the toggle button
+    const btn = item.querySelector('.ast-menu-toggle');
+    if (!btn) {
+      console.error('[Menu] .ast-menu-toggle button not found!');
+      return false;
     }
-
-    // Reset submenu initial state
-    subMenu.style.cssText = 'display:none !important; visibility:hidden !important; opacity:0 !important;';
-    newToggleBtn.setAttribute('aria-expanded', 'false');
-
-    console.log('[ProfileMenu] Initialized successfully');
-
-    // CRITICAL: Click handler on toggle button
-    newToggleBtn.addEventListener('click', function(e) {
-      console.log('[ProfileMenu] *** TOGGLE BUTTON CLICKED ***');
+    
+    console.log('[Menu] Toggle button found!');
+    
+    // Track state
+    let isOpen = false;
+    
+    // Click handler - use capture phase to intercept before Astra
+    function toggleClick(e) {
+      console.log('[Menu] *** BUTTON CLICKED ***');
       e.preventDefault();
       e.stopPropagation();
+      e.stopImmediatePropagation();
       
-      const isOpen = subMenu.style.display === 'block';
-      console.log('[ProfileMenu] Current state: ' + (isOpen ? 'OPEN' : 'CLOSED'));
+      isOpen = !isOpen;
+      console.log('[Menu] Toggle state:', isOpen ? 'OPEN' : 'CLOSE');
       
       if (isOpen) {
-        console.log('[ProfileMenu] -> CLOSING');
-        subMenu.style.cssText = 'display:none !important; visibility:hidden !important; opacity:0 !important;';
-        newToggleBtn.setAttribute('aria-expanded', 'false');
+        submenu.style.display = 'block !important';
+        submenu.style.visibility = 'visible !important';
+        submenu.style.opacity = '1 !important';
+        btn.setAttribute('aria-expanded', 'true');
+        console.log('[Menu] Submenu should be VISIBLE now');
       } else {
-        console.log('[ProfileMenu] -> OPENING');
-        subMenu.style.cssText = 'display:block !important; visibility:visible !important; opacity:1 !important;';
-        newToggleBtn.setAttribute('aria-expanded', 'true');
+        submenu.style.display = 'none !important';
+        submenu.style.visibility = 'hidden !important';
+        submenu.style.opacity = '0 !important';
+        btn.setAttribute('aria-expanded', 'false');
+        console.log('[Menu] Submenu should be HIDDEN now');
       }
-    }, true); // Use capture phase
-
-    // Also handle menu link clicks
-    if (menuLink) {
-      menuLink.addEventListener('click', function(e) {
+    }
+    
+    // Attach handler on btn directly
+    btn.addEventListener('click', toggleClick, true);
+    
+    // Also try menu link
+    const link = item.querySelector('.menu-link');
+    if (link) {
+      link.addEventListener('click', function(e) {
         if (this.getAttribute('href') === '#') {
-          console.log('[ProfileMenu] Menu link clicked (# href)');
-          e.preventDefault();
-          e.stopPropagation();
-          newToggleBtn.click();
+          console.log('[Menu] Menu link clicked');
+          btn.click();
         }
       }, true);
     }
-
-    // Close when clicking outside
+    
+    // Close on outside click
     document.addEventListener('click', function(e) {
-      if (!menuItem.contains(e.target) && subMenu.style.display === 'block') {
-        console.log('[ProfileMenu] Outside click detected, closing');
-        subMenu.style.cssText = 'display:none !important; visibility:hidden !important; opacity:0 !important;';
-        newToggleBtn.setAttribute('aria-expanded', 'false');
+      if (!item.contains(e.target) && isOpen) {
+        console.log('[Menu] Outside click - closing');
+        isOpen = false;
+        submenu.style.display = 'none !important';
+        submenu.style.visibility = 'hidden !important';
+        submenu.style.opacity = '0 !important';
+        btn.setAttribute('aria-expanded', 'false');
       }
     });
-
-    // Close on submenu item clicks
-    subMenu.querySelectorAll('li a').forEach(link => {
-      link.addEventListener('click', function(e) {
-        console.log('[ProfileMenu] Submenu item clicked:', this.textContent);
-        setTimeout(() => {
-          subMenu.style.cssText = 'display:none !important; visibility:hidden !important; opacity:0 !important;';
-          newToggleBtn.setAttribute('aria-expanded', 'false');
-        }, 100);
+    
+    // Close on submenu item click
+    submenu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', function() {
+        console.log('[Menu] Menu item clicked:', this.textContent);
+        isOpen = false;
+        submenu.style.display = 'none !important';
+        submenu.style.visibility = 'hidden !important';
+        submenu.style.opacity = '0 !important';
+        btn.setAttribute('aria-expanded', 'false');
       });
     });
-
-    console.log('[ProfileMenu] All handlers attached');
+    
+    console.log('[Menu] Setup complete!');
     return true;
   }
-
-  // Try immediately
+  
   if (document.readyState === 'loading') {
+    console.log('[Menu] Waiting for DOM...');
     document.addEventListener('DOMContentLoaded', function() {
-      console.log('[ProfileMenu] DOMContentLoaded fired');
-      if (!initProfileMenu()) {
-        // Retry after a delay if not found
-        setTimeout(() => {
-          console.log('[ProfileMenu] Retrying initialization...');
-          initProfileMenu();
-        }, 500);
+      console.log('[Menu] DOM ready');
+      if (!setupMenu()) {
+        console.log('[Menu] Retrying in 500ms...');
+        setTimeout(setupMenu, 500);
       }
     });
   } else {
-    console.log('[ProfileMenu] DOM already loaded');
-    if (!initProfileMenu()) {
-      setTimeout(() => {
-        console.log('[ProfileMenu] Retrying initialization...');
-        initProfileMenu();
-      }, 500);
+    console.log('[Menu] DOM already ready');
+    if (!setupMenu()) {
+      console.log('[Menu] Retrying in 500ms...');
+      setTimeout(setupMenu, 500);
     }
   }
 })();
