@@ -5,8 +5,8 @@
 
 .site-header #masthead .ast-container {
     max-width: 100%;
-    padding-left: 35px;
-    padding-right: 35px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .site-header .ast-builder-menu-1 {
@@ -47,8 +47,8 @@
 .ast-header-break-point .site-header .ast-primary-header-bar.main-header-bar {
     padding-top: 10px !important;
     padding-bottom: 10px !important;
-    padding-left: 25px !important;
-    padding-right: 25px !important;
+    padding-left: 18px !important;
+    padding-right: 18px !important;
 }
 
 .site-header .ast-primary-header-bar {
@@ -74,8 +74,8 @@
     }
 
     .site-header .ast-builder-menu-1 .menu-item > .menu-link {
-        padding-left: 25px !important;
-        padding-right: 25px !important;
+        padding-left: 18px !important;
+        padding-right: 18px !important;
     }
 
     .site-header .site-header-primary-section-right {
@@ -107,8 +107,8 @@
 .ast-desktop .site-header .main-header-menu > .menu-item > .menu-link {
     padding-top: 25px !important;
     padding-bottom: 25px !important;
-    padding-left: 25px !important;
-    padding-right: 25px !important;
+    padding-left: 18px !important;
+    padding-right: 18px !important;
 }
 
 .ast-header-break-point .site-header .main-header-menu > .menu-item > .menu-link {
