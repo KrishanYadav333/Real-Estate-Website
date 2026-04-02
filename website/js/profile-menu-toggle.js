@@ -1,7 +1,9 @@
 (function () {
   function initProfileMenu() {
     var menuItems = document.querySelectorAll('#menu-item-500, .menu-item-500');
+    console.log('[ProfileMenu] Found menu items:', menuItems.length);
     if (!menuItems.length) {
+      console.warn('[ProfileMenu] No menu items found with selectors #menu-item-500 or .menu-item-500');
       return;
     }
 
@@ -45,6 +47,7 @@
       }
 
       function openMenu() {
+        console.log('[ProfileMenu] openMenu() called', { menuItem, subMenu });
         closeAllMenus();
         menuItem.classList.add('profile-menu-force-open');
         subMenu.classList.add('profile-menu-force-open');
@@ -55,8 +58,10 @@
         subMenu.style.visibility = 'visible';
         subMenu.style.opacity = '1';
         subMenu.style.pointerEvents = 'auto';
+        console.log('[ProfileMenu] Inline styles applied', { display: subMenu.style.display, visibility: subMenu.style.visibility, opacity: subMenu.style.opacity });
         
         if (isMobileViewport()) {
+          console.log('[ProfileMenu] Mobile viewport detected, scrolling into view');
           menuItem.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
         window.requestAnimationFrame(placeMobileMenu);
@@ -87,14 +92,17 @@
       }
 
       function toggleMenu(e) {
+        console.log('[ProfileMenu] Toggle button clicked', { isOpen: isOpen(), button: toggleBtn });
         if (e) {
           e.preventDefault();
           e.stopPropagation();
         }
 
         if (isOpen()) {
+          console.log('[ProfileMenu] Closing menu');
           closeMenu();
         } else {
+          console.log('[ProfileMenu] Opening menu');
           openMenu();
         }
       }
@@ -152,4 +160,5 @@
   } else {
     initProfileMenu();
   }
+  console.log('[ProfileMenu] Script initialized, DOM ready state:', document.readyState);
 })();
