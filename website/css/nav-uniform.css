@@ -78,6 +78,19 @@
         padding-right: 18px !important;
     }
 
+    /* Align profile button with other menu items */
+    #menu-item-500 {
+        line-height: 70px !important;
+    }
+
+    #menu-item-500 .menu-link {
+        height: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        padding-left: 18px !important;
+        padding-right: 18px !important;
+    }
+
     .site-header .site-header-primary-section-right {
         justify-content: flex-end;
     }
