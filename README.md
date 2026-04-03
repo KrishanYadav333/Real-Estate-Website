@@ -137,7 +137,29 @@ Project-Broker/
    - Dashboard: http://localhost:3000/dashboard
    - Properties: http://localhost:3000/projects.html
 
-### Default Test Account
+### User Registration & Signup
+
+Anyone can register and create a new account:
+
+1. **Navigate to the Login page**: http://localhost:3000/login
+2. **Click "Sign Up"** or the registration form
+3. **Enter your details**:
+   - Full Name
+   - Email Address
+   - Password (secure with bcryptjs hashing)
+   - Confirm Password
+4. **Click "Register"** to create your account
+5. **Login** with your new credentials
+
+After registration, your account will be created and you can:
+- Browse all available properties
+- Add properties to your favorites list
+- Access your personal dashboard
+- Manage your profile
+
+### Default Test Account (Optional)
+
+To test the application quickly without registering, you can use:
 
 ```
 Email: test@example.com
