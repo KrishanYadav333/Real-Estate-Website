@@ -328,15 +328,6 @@ Contributions are welcome! Please follow these steps:
 
 ---
 
-## 🙏 Acknowledgments
-
-- **Astra Theme** - WordPress theme framework
-- **Elementor** - Page builder
-- **Express.js** - Web framework
-- **Community** - All contributors and supporters
-
----
-
 **Made by Krishan Realty Team**
 
 - `POST /api/login` - Login user
