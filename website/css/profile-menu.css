@@ -19,7 +19,7 @@
   border: none;
   padding: 0;
   margin: 0;
-  display: inline-flex;
+  display: none;
   align-items: center;
   justify-content: center;
   width: 18px;
@@ -27,9 +27,59 @@
   flex-shrink: 0;
 }
 
+@media (max-width: 921px) {
+  #menu-item-500 .ast-menu-toggle,
+  .menu-item-500 .ast-menu-toggle {
+    display: inline-flex;
+  }
+}
+
 #menu-item-500 .sub-menu,
 .menu-item-500 .sub-menu {
   list-style: none;
+}
+
+@media (min-width: 922px) {
+  body.uae-sticky-header-enabled #ast-desktop-header #menu-item-500,
+  body.uae-sticky-header-enabled #ast-desktop-header .menu-item-500 {
+    display: flex !important;
+    align-items: center !important;
+    height: 70px !important;
+  }
+
+  body.uae-sticky-header-enabled #ast-desktop-header #menu-item-500 > .menu-link,
+  body.uae-sticky-header-enabled #ast-desktop-header .menu-item-500 > .menu-link {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 70px !important;
+    line-height: 70px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  body.uae-sticky-header-enabled #ast-desktop-header #menu-item-500 > .menu-link svg,
+  body.uae-sticky-header-enabled #ast-desktop-header .menu-item-500 > .menu-link svg {
+    display: block;
+    vertical-align: middle;
+    transform: translateY(1px);
+  }
+
+  body.uae-sticky-header-enabled .site-header #ast-desktop-header .main-header-menu > #menu-item-500.menu-item-has-children > .ast-menu-toggle,
+  body.uae-sticky-header-enabled .site-header #ast-desktop-header .main-header-menu > .menu-item-500.menu-item-has-children > .ast-menu-toggle {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    overflow: hidden !important;
+    outline: none !important;
+  }
 }
 
 /* When NOT forced open, use hover behavior (Astra default) */

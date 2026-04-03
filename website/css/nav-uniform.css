@@ -56,6 +56,20 @@
     border-bottom-style: solid;
 }
 
+/* Prevent Astra sticky header from overriding position */
+#masthead {
+    position: relative !important;
+    top: auto !important;
+}
+
+/* Fix profile icon vertical alignment on homepage */
+.uae-sticky-header-enabled .site-header .main-header-menu > .menu-item,
+.elementor-page .site-header .main-header-menu > .menu-item {
+    height: 70px !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
 /* Keep only one header variant visible to avoid oversized stacked header area */
 @media (min-width: 922px) {
     #ast-mobile-header {
@@ -104,19 +118,6 @@
     }
 
     .site-header .ast-builder-menu-1 .menu-item > .menu-link {
-        padding-left: 18px !important;
-        padding-right: 18px !important;
-    }
-
-    /* Align profile button with other menu items */
-    #menu-item-500 {
-        line-height: 70px !important;
-    }
-
-    #menu-item-500 .menu-link {
-        height: 100% !important;
-        display: flex !important;
-        align-items: center !important;
         padding-left: 18px !important;
         padding-right: 18px !important;
     }

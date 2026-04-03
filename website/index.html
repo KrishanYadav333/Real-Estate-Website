@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html><html lang="en-US"><head>
+<!DOCTYPE html><html lang="en-US"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11"> 
@@ -279,12 +279,510 @@ var starterTemplatesPreview = {"site_url":"#","AstColorPaletteVarPrefix":"--ast-
 			<link rel="icon" href="images/cropped-favicon-free-img-150x150.png" sizes="32x32">
 <link rel="icon" href="images/cropped-favicon-free-img-300x300.png" sizes="192x192">
 <link rel="apple-touch-icon" href="images/cropped-favicon-free-img-300x300.png">
-<script src="js/wp-emoji-release.min.js" defer=""></script><link rel="stylesheet" href="css/nav-uniform.css">    <link rel="stylesheet" href="css/profile-menu.css">
+<script src="js/wp-emoji-release.min.js" defer=""></script><style id="nav-override">
+.site-header .main-header-bar,
+.site-header .ast-primary-header-bar {
+    min-height: 70px !important;
+}
+
+.site-header #masthead .ast-container {
+    max-width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.site-header .ast-builder-menu-1 {
+    font-family: inherit;
+    font-weight: inherit;
+    text-transform: uppercase;
+}
+
+.site-header .main-header-menu > .menu-item > .menu-link,
+.site-header .main-header-menu > .menu-item > .ast-menu-toggle {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    line-height: 2em;
+    color: var(--ast-global-color-3) !important;
+}
+
+.site-header .ast-builder-menu-1 .sub-menu .menu-link,
+.site-header .ast-builder-menu-1 .inline-on-mobile .sub-menu .menu-link {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+}
+
+.site-header .ast-builder-menu-1 .menu-item .sub-menu .menu-link {
+    border-bottom-width: 1px;
+    border-color: #eaeaea;
+    border-style: solid;
+}
+
+.site-header .main-header-menu > .menu-item > .menu-link {
+    border: 0 !important;
+}
+
+.site-header .ast-builder-menu-1 .menu-item .sub-menu > .menu-item:last-child > .menu-link {
+    border-bottom-width: 0;
+}
+
+.ast-desktop .site-header .ast-primary-header-bar.main-header-bar,
+.ast-header-break-point .site-header .ast-primary-header-bar.main-header-bar {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+}
+
+.site-header .ast-primary-header-bar {
+    border-bottom-width: 6px;
+    border-bottom-style: solid;
+}
+
+/* Prevent Astra sticky header from overriding position */
+#masthead {
+    position: relative !important;
+    top: auto !important;
+}
+
+/* Fix profile icon vertical alignment on homepage */
+.uae-sticky-header-enabled .site-header .main-header-menu > .menu-item,
+.elementor-page .site-header .main-header-menu > .menu-item {
+    height: 70px !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+/* Keep only one header variant visible to avoid oversized stacked header area */
+@media (min-width: 922px) {
+    #ast-mobile-header {
+        display: none !important;
+    }
+}
+
+@media (max-width: 921px) {
+    #ast-desktop-header {
+        display: none !important;
+    }
+}
+
+/* Enforce regular navbar height */
+.site-header .ast-main-header-wrap,
+.site-header .main-header-bar-wrap,
+.site-header .ast-primary-header-bar,
+.site-header .site-primary-header-wrap {
+    min-height: 70px !important;
+}
+
+.site-header .main-header-menu > .menu-item,
+.site-header .main-header-menu > .menu-item > .menu-link,
+.site-header .main-header-menu > .menu-item > .ast-menu-toggle {
+    height: 70px !important;
+    line-height: 70px !important;
+    display: flex;
+    align-items: center;
+}
+
+@media (min-width: 922px) {
+    .site-header .site-primary-header-wrap.ast-container,
+    .site-header .ast-primary-header-bar .ast-container {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .site-header .main-header-menu > .menu-item {
+        line-height: 70px;
+    }
+
+    .site-header .main-header-menu > .menu-item > .menu-link {
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .site-header .ast-builder-menu-1 .menu-item > .menu-link {
+        padding-left: 18px !important;
+        padding-right: 18px !important;
+    }
+
+    #menu-item-500 .menu-link {
+        height: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        padding-left: 18px !important;
+        padding-right: 18px !important;
+    }
+
+    .site-header .site-header-primary-section-right {
+        justify-content: flex-end;
+    }
+}
+
+.site-header .ast-builder-menu-1 .menu-item:hover > .menu-link,
+.site-header .ast-builder-menu-1 .inline-on-mobile .menu-item:hover > .ast-menu-toggle,
+.site-header .ast-builder-menu-1 .menu-item:hover > .ast-menu-toggle,
+.site-header .ast-builder-menu-1 .menu-item.current-menu-item > .menu-link,
+.site-header .ast-builder-menu-1 .inline-on-mobile .menu-item.current-menu-item > .ast-menu-toggle,
+.site-header .ast-builder-menu-1 .current-menu-ancestor > .menu-link,
+.site-header .ast-builder-menu-1 .current-menu-ancestor > .ast-menu-toggle,
+.site-header .ast-builder-menu-1 .menu-item.current-menu-item > .ast-menu-toggle {
+    color: var(--ast-global-color-1) !important;
+}
+
+.site-header .ast-builder-menu-1 .sub-menu,
+.site-header .ast-builder-menu-1 .inline-on-mobile .sub-menu {
+    border: 1px solid #eaeaea;
+}
+
+.site-header .ast-builder-menu-1 .sub-menu .menu-link,
+.site-header .ast-builder-menu-1 .inline-on-mobile .sub-menu .menu-link {
+    color: var(--ast-global-color-3) !important;
+}
+
+.ast-desktop .site-header .main-header-menu > .menu-item > .menu-link {
+    padding-top: 25px !important;
+    padding-bottom: 25px !important;
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+}
+
+.ast-header-break-point .site-header .main-header-menu > .menu-item > .menu-link {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    padding-left: 25px !important;
+    padding-right: 25px !important;
+}
+
+/* Keep the last top-level dropdown inside the viewport on desktop. */
+.site-header #ast-desktop-header .main-header-menu > .menu-item-has-children:last-child {
+    position: relative;
+}
+
+.site-header #ast-desktop-header .main-header-menu > .menu-item-has-children:last-child > .sub-menu {
+    left: auto !important;
+    right: 0 !important;
+}
+
+/* Force a stacked mobile menu and in-flow submenu so it is always visible. */
+@media (max-width: 921px) {
+    .ast-desktop .site-header .ast-primary-header-bar.main-header-bar,
+    .ast-header-break-point .site-header .ast-primary-header-bar.main-header-bar {
+        padding-top: 1.5em !important;
+        padding-bottom: 1.5em !important;
+    }
+
+    .site-header #ast-desktop-header {
+        display: none !important;
+    }
+
+    .site-header #ast-mobile-header {
+        display: block !important;
+    }
+
+    .site-header #masthead .ast-mobile-header-wrap .ast-primary-header-bar {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+
+    .site-header #ast-hf-menu-1-mobile {
+        display: block !important;
+        width: 100%;
+    }
+
+    .site-header #ast-hf-menu-1-mobile > .menu-item {
+        display: block !important;
+        width: 100%;
+    }
+
+    .site-header #ast-hf-menu-1-mobile .menu-link {
+        display: block;
+    }
+
+    .site-header #ast-hf-menu-1-mobile .menu-item-has-children > .sub-menu {
+        position: static !important;
+        left: auto !important;
+        right: auto !important;
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    .site-header .ast-mobile-header-content {
+        display: none;
+        overflow-x: hidden;
+    }
+
+    .ast-main-header-nav-open .site-header .ast-mobile-header-content {
+        display: block;
+    }
+}
+
+@media (max-width: 544px) {
+    .ast-desktop .site-header .ast-primary-header-bar.main-header-bar,
+    .ast-header-break-point .site-header .ast-primary-header-bar.main-header-bar {
+        padding-top: 1em !important;
+        padding-bottom: 1em !important;
+    }
+}
+
+@media (min-width: 922px) {
+    .site-header .site-primary-header-wrap .ast-builder-grid-row {
+        grid-template-columns: 1fr auto;
+        align-items: center;
+    }
+
+    .site-header .site-header-primary-section-left {
+        flex: 0 0 auto;
+    }
+
+    .site-header .site-header-primary-section-right {
+        flex: 0 0 auto;
+        justify-self: end;
+        margin-left: 0;
+        justify-content: flex-end;
+        padding-left: 0;
+        max-width: 100%;
+        margin-right: 0;
+    }
+
+    .site-header .ast-main-header-bar-alignment {
+        margin-left: auto !important;
+    }
+
+    .site-header .ast-main-header-bar-alignment,
+    .site-header .main-header-bar-navigation,
+    .site-header .ast-builder-menu-1 .main-header-menu {
+        justify-content: flex-end;
+    }
+
+    .site-header #menu-item-500,
+    .site-header .menu-item-500 {
+        height: 70px !important;
+        line-height: 70px !important;
+        display: flex !important;
+        align-items: center !important;
+        align-self: stretch !important;
+    }
+
+    .site-header #menu-item-500 > .menu-link,
+    .site-header .menu-item-500 > .menu-link {
+        height: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    .site-header #menu-item-500 > .ast-menu-toggle,
+    .site-header .menu-item-500 > .ast-menu-toggle {
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        border: 0 !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        overflow: hidden !important;
+        outline: none !important;
+    }
+
+    .site-header .ast-builder-menu-1 .main-header-menu {
+        gap: 2px;
+    }
+
+    .site-header .site-header-primary-section-left {
+        padding-left: 0;
+        margin-right: auto;
+    }
+
+    .site-header #ast-desktop-header {
+        display: block !important;
+    }
+
+    .site-header #ast-desktop-header .main-header-menu .sub-menu {
+        min-width: 240px;
+    }
+
+    .site-header #ast-desktop-header .main-header-menu > .menu-item > .menu-link {
+        padding-left: 14px !important;
+        padding-right: 14px !important;
+    }
+
+    .site-header #ast-desktop-header .main-header-menu .menu-item-has-children > .sub-menu {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(8px);
+        transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .site-header #ast-desktop-header .main-header-menu .menu-item-has-children:hover > .sub-menu,
+    .site-header #ast-desktop-header .main-header-menu .menu-item-has-children.focus > .sub-menu {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+
+    .site-header #ast-desktop-header .main-header-menu .sub-menu .menu-link {
+        display: block;
+        padding: 22px 20px !important;
+        line-height: 1.2;
+    }
+
+    .site-header #ast-mobile-header,
+    .site-header .ast-mobile-header-content {
+        display: none !important;
+    }
+}
+/* Profile Menu - Dropdown styling */
+
+#menu-item-500,
+.menu-item-500 {
+  position: relative;
+  display: flex !important;
+  align-items: center !important;
+  align-self: stretch !important;
+}
+
+#menu-item-500 .menu-link,
+.menu-item-500 .menu-link {
+  gap: 4px;
+  cursor: pointer;
+  user-select: none;
+  display: flex !important;
+  align-items: center !important;
+  height: 100% !important;
+}
+
+#menu-item-500 .ast-menu-toggle,
+.menu-item-500 .ast-menu-toggle {
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 921px) {
+  #menu-item-500 .ast-menu-toggle,
+  .menu-item-500 .ast-menu-toggle {
+    display: inline-flex;
+  }
+}
+
+#menu-item-500 .sub-menu,
+.menu-item-500 .sub-menu {
+  list-style: none;
+}
+
+/* When NOT forced open, use hover behavior (Astra default) */
+#menu-item-500:hover .sub-menu:not(.profile-menu-force-open),
+.menu-item-500:hover .sub-menu:not(.profile-menu-force-open) {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* When forced open, ALWAYS show regardless of hover state */
+#menu-item-500.profile-menu-force-open > .sub-menu,
+#menu-item-500 .sub-menu.profile-menu-force-open,
+.menu-item-500.profile-menu-force-open > .sub-menu,
+.menu-item-500 .sub-menu.profile-menu-force-open {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  position: absolute !important;
+  background: white !important;
+  border: 1px solid #ddd !important;
+  border-radius: 4px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  z-index: 99999 !important;
+  top: 100% !important;
+  right: 0 !important;
+  left: auto !important;
+  min-width: 180px !important;
+  padding: 8px 0 !important;
+  margin-top: 4px !important;
+  list-style: none !important;
+  width: auto !important;
+  max-width: none !important;
+}
+
+/* Menu items styling */
+#menu-item-500 .sub-menu li,
+.menu-item-500 .sub-menu li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: block;
+}
+
+#menu-item-500 .sub-menu li a,
+.menu-item-500 .sub-menu li a {
+  display: block;
+  padding: 10px 16px;
+  margin: 0;
+  color: #333;
+  background-color: white;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: normal;
+  white-space: nowrap;
+  border: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  line-height: 1.5;
+}
+
+#menu-item-500 .sub-menu li a:hover,
+#menu-item-500 .sub-menu li a:focus,
+.menu-item-500 .sub-menu li a:hover,
+.menu-item-500 .sub-menu li a:focus {
+  background-color: #f5f5f5;
+  color: #da2128;
+  padding-left: 20px;
+}
+
+/* Mobile viewport: allow scrolling within dropdown */
+@media (max-width: 921px) {
+  #menu-item-500.profile-menu-force-open > .sub-menu,
+  #menu-item-500 .sub-menu.profile-menu-force-open,
+  .menu-item-500.profile-menu-force-open > .sub-menu,
+  .menu-item-500 .sub-menu.profile-menu-force-open {
+    max-height: 400px !important;
+    overflow-y: auto !important;
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 921px) {
+  #menu-item-500.profile-menu-force-open > .sub-menu,
+  #menu-item-500 .sub-menu.profile-menu-force-open,
+  .menu-item-500.profile-menu-force-open > .sub-menu,
+  .menu-item-500 .sub-menu.profile-menu-force-open {
+    position: fixed;
+    right: 8px;
+    left: auto;
+    top: 72px;
+    bottom: auto;
+    width: min(220px, calc(100vw - 16px));
+    min-width: 180px;
+    max-height: calc(100vh - 16px);
+    overflow-y: auto;
+  }
+}
+
+</style>
 </head>
-<body itemtype="https://schema.org/WebPage" itemscope="itemscope" class="home wp-singular page-template-default page page-id-11 wp-custom-logo wp-embed-responsive wp-theme-astra ehf-template-astra ehf-stylesheet-astra ast-desktop ast-page-builder-template ast-no-sidebar astra-4.12.3 ast-single-post ast-mobile-inherit-site-logo ast-inherit-site-logo-transparent ast-theme-transparent-header ast-hfb-header ast-full-width-primary-header uae-sticky-header-enabled elementor-default elementor-kit-346 elementor-page elementor-page-11">
+<body itemtype="https://schema.org/WebPage" itemscope="itemscope" class="home wp-singular page-template-default page page-id-11 wp-custom-logo wp-embed-responsive wp-theme-astra ehf-template-astra ehf-stylesheet-astra ast-desktop ast-page-builder-template ast-no-sidebar astra-4.12.3 ast-single-post ast-mobile-inherit-site-logo ast-inherit-site-logo-transparent ast-hfb-header ast-full-width-primary-header uae-sticky-header-enabled elementor-default elementor-kit-346 elementor-page elementor-page-11">
 <a class="skip-link screen-reader-text" href="#content">
 		Skip to content</a>
-<div class="hfeed site" id="page">
 			<header class="site-header header-main-layout-1 ast-primary-menu-enabled ast-builder-menu-toggle-icon ast-mobile-header-inline" id="masthead" itemtype="https://schema.org/WPHeader" itemscope="itemscope" itemid="#masthead">
 			<div id="ast-desktop-header" data-toggle-type="dropdown">
 		<div class="ast-main-header-wrap main-header-bar-wrap ">
@@ -739,7 +1237,7 @@ var starterTemplatesPreview = {"site_url":"#","AstColorPaletteVarPrefix":"--ast-
 											<div class="site-footer-primary-section-4 site-footer-section site-footer-section-4">
 							<aside class="footer-widget-area widget-area site-footer-focus-item footer-widget-area-inner" data-section="sidebar-widgets-footer-widget-4" aria-label="Footer Widget 4" role="region">
 			<section id="text-5" class="widget widget_text"><h2 class="widget-title">Connect</h2>			<div class="textwidget"><p>+977 9822321530<br>
-<a href="mailto:kryshan753@gmail.com">kryshan753@gmail.com</a>​<br>
+<a href="mailto:kryshan753@gmail.com">kryshan753@gmail.com</a>?<br>
 Kathmandu,<br>
 Nepal</p>
 </div>
@@ -755,7 +1253,7 @@ Nepal</p>
 					<div class="ast-builder-footer-grid-columns site-below-footer-inner-wrap ast-builder-grid-row">
 											<div class="site-footer-below-section-1 site-footer-section site-footer-section-1">
 								<div class="ast-builder-layout-element ast-flex site-footer-focus-item ast-footer-copyright" data-section="section-footer-builder">
-				<div class="ast-footer-copyright"><p>Copyright © 2026 Krishan Realty</p>
+				<div class="ast-footer-copyright"><p>Copyright � 2026 Krishan Realty</p>
 </div>			</div>
 				<div class="footer-widget-area widget-area site-footer-focus-item ast-footer-html-1" data-section="section-fb-html-1">
 			<div class="ast-header-html inner-link-style-"><div class="ast-builder-html-element"><p>Powered by Krishan Realty</p>
@@ -838,6 +1336,7 @@ Nepal</p>
 var astra = {"break_point":"921","isRtl":"","is_scroll_to_id":"","is_scroll_to_top":"","is_header_footer_builder_active":"1","responsive_cart_click":"flyout","is_dark_palette":""};
 //# sourceURL=astra-theme-js-js-extra
 </script>
+<script>window._astraDisableMenuInit=true;</script>
 <script src="js/frontend.min.js" id="astra-theme-js-js"></script>
 <script src="js/webpack.runtime.min.js" id="elementor-webpack-runtime-js"></script>
 <script src="js/frontend-modules.min.js" id="elementor-frontend-modules-js"></script>
@@ -976,6 +1475,76 @@ wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
 /*! This file is auto-generated */
 const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(window._wpemojiSettings=a,"wpEmojiSettingsSupports"),s=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const a=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===a[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,a){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!a(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,a){let r;const o=(r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),s=(o.textBaseline="top",o.font="600 32px Arial",{});return e.forEach(e=>{s[e]=t(o,e,n,a)}),s}function r(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}a.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(s),u.toString(),c.toString(),p.toString()].join(",")+"));",a=new Blob([e],{type:"text/javascript"});const r=new Worker(URL.createObjectURL(a),{name:"wpTestEmojiSupports"});return void(r.onmessage=e=>{i(n=e.data),r.terminate(),t(n)})}catch(e){}i(n=f(s,u,c,p))}t(n)}).then(e=>{for(const n in e)a.supports[n]=e[n],a.supports.everything=a.supports.everything&&a.supports[n],"flag"!==n&&(a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&a.supports[n]);var t;a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&!a.supports.flag,a.supports.everything||((t=a.source||{}).concatemoji?r(t.concatemoji):t.wpemoji&&t.twemoji&&(r(t.twemoji),r(t.wpemoji)))});
 //# sourceURL=#
+</script>
+<script>
+(function () {
+    function setupNavigationMenu() {
+        var body = document.body;
+        var menuToggles = document.querySelectorAll('.main-header-menu-toggle');
+        var submenuToggles = document.querySelectorAll('.ast-menu-toggle');
+
+        menuToggles.forEach(function (toggle) {
+            toggle.addEventListener('click', function () {
+                var isOpen = body.classList.toggle('ast-main-header-nav-open');
+                toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            });
+        });
+
+        submenuToggles.forEach(function (toggle) {
+            toggle.addEventListener('click', function (event) {
+                event.preventDefault();
+                var expanded = toggle.getAttribute('aria-expanded') === 'true';
+                toggle.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+                var parent = toggle.closest('.menu-item-has-children');
+                if (parent) {
+                    parent.classList.toggle('ast-submenu-expanded', !expanded);
+                }
+            });
+        });
+
+        document.addEventListener('click', function (event) {
+            if (!event.target.closest('.site-header')) {
+                body.classList.remove('ast-main-header-nav-open');
+                menuToggles.forEach(function (toggle) {
+                    toggle.setAttribute('aria-expanded', 'false');
+                });
+                submenuToggles.forEach(function (toggle) {
+                    toggle.setAttribute('aria-expanded', 'false');
+                });
+                document.querySelectorAll('.menu-item-has-children').forEach(function (item) {
+                    item.classList.remove('ast-submenu-expanded');
+                });
+            }
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setupNavigationMenu);
+    } else {
+        setupNavigationMenu();
+    }
+})();
+</script>
+<script>
+(function () {
+    function stripAstraMenuListeners() {
+        // Replace header nav nodes with clones to remove all Astra event listeners
+        var header = document.getElementById('masthead');
+        if (!header) return;
+        var newHeader = header.cloneNode(true);
+        header.parentNode.replaceChild(newHeader, header);
+
+        // Remove ast-desktop class that Astra adds to body which affects CSS
+        document.body.classList.remove('ast-desktop');
+        // Re-add it so nav-uniform.css desktop rules still apply
+        document.body.classList.add('ast-desktop');
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', stripAstraMenuListeners);
+    } else {
+        stripAstraMenuListeners();
+    }
+})();
 </script>
 <script src="js/profile-menu-toggle.js"></script>
 </body></html>
