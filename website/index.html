@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en-US"><head>
+ï»¿<!DOCTYPE html><html lang="en-US"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11"> 
@@ -277,9 +277,10 @@ var starterTemplatesPreview = {"site_url":"#","AstColorPaletteVarPrefix":"--ast-
 					}
 				}
 			</style>
-			<link rel="icon" href="images/cropped-favicon-free-img-300x300.png" sizes="32x32">
-<link rel="icon" href="images/cropped-favicon-free-img-300x300.png" sizes="192x192">
-<link rel="apple-touch-icon" href="images/cropped-favicon-free-img-300x300.png">
+			<link rel="icon" href="images/cropped-favicon-free-img-300x300.png?v=2" sizes="32x32">
+<link rel="icon" href="images/cropped-favicon-free-img-300x300.png?v=2" sizes="192x192">
+<link rel="apple-touch-icon" href="images/cropped-favicon-free-img-300x300.png?v=2">
+<link rel="shortcut icon" href="favicon.ico?v=3" type="image/x-icon">
 <script src="js/wp-emoji-release.min.js" defer=""></script><style id="nav-override">
 .site-header .main-header-bar,
 .site-header .ast-primary-header-bar {
@@ -779,6 +780,69 @@ var starterTemplatesPreview = {"site_url":"#","AstColorPaletteVarPrefix":"--ast-
   }
 }
 
+/* Homepage only: transparent navbar */
+body.home #masthead {
+	position: absolute !important;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 999;
+	background: transparent !important;
+}
+
+body.home #ast-desktop-header,
+body.home #ast-mobile-header,
+body.home .site-header,
+body.home .site-header .main-header-bar,
+body.home .site-header .ast-primary-header-bar,
+body.home .site-header .main-header-bar-wrap,
+body.home .site-header .ast-main-header-wrap,
+body.home .site-header .site-primary-header-wrap,
+body.home .site-header .ast-builder-grid-row-container,
+body.home .site-header .ast-container,
+body.home .site-header .ast-builder-grid-row,
+body.home .site-header .site-header-section,
+body.home .site-header .site-header-primary-section-left,
+body.home .site-header .site-header-primary-section-right,
+body.home .site-header .ast-builder-layout-element {
+	background: transparent !important;
+	background-color: transparent !important;
+	background-image: none !important;
+	box-shadow: none !important;
+}
+
+body.home .site-header .ast-primary-header-bar {
+	border-bottom-color: transparent !important;
+}
+
+body.home #masthead::before,
+body.home #masthead::after,
+body.home .site-header::before,
+body.home .site-header::after,
+body.home .site-header .main-header-bar::before,
+body.home .site-header .main-header-bar::after,
+body.home .site-header .ast-primary-header-bar::before,
+body.home .site-header .ast-primary-header-bar::after {
+	background: transparent !important;
+	background-color: transparent !important;
+	border-color: transparent !important;
+	box-shadow: none !important;
+}
+
+body.home #masthead,
+body.home .site-header,
+body.home .site-header .main-header-bar,
+body.home .site-header .ast-primary-header-bar {
+	border: 0 !important;
+	backdrop-filter: none !important;
+	-webkit-backdrop-filter: none !important;
+}
+
+/* Keep dropdown panels readable while header stays transparent */
+body.home .site-header .main-header-menu .sub-menu {
+	background-color: #ffffff !important;
+}
+
 </style>
 </head>
 <body itemtype="https://schema.org/WebPage" itemscope="itemscope" class="home wp-singular page-template-default page page-id-11 wp-custom-logo wp-embed-responsive wp-theme-astra ehf-template-astra ehf-stylesheet-astra ast-desktop ast-page-builder-template ast-no-sidebar astra-4.12.3 ast-single-post ast-mobile-inherit-site-logo ast-inherit-site-logo-transparent ast-hfb-header ast-full-width-primary-header uae-sticky-header-enabled elementor-default elementor-kit-346 elementor-page elementor-page-11">
@@ -1254,7 +1318,7 @@ Nepal</p>
 					<div class="ast-builder-footer-grid-columns site-below-footer-inner-wrap ast-builder-grid-row">
 											<div class="site-footer-below-section-1 site-footer-section site-footer-section-1">
 								<div class="ast-builder-layout-element ast-flex site-footer-focus-item ast-footer-copyright" data-section="section-footer-builder">
-				<div class="ast-footer-copyright"><p>Copyright © 2026 Krishan Realty</p>
+				<div class="ast-footer-copyright"><p>Copyright ï¿½ 2026 Krishan Realty</p>
 </div>			</div>
 				<div class="footer-widget-area widget-area site-footer-focus-item ast-footer-html-1" data-section="section-fb-html-1">
 			<div class="ast-header-html inner-link-style-"><div class="ast-builder-html-element"><p>Powered by Krishan Realty</p>
