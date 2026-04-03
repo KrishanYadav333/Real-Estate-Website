@@ -291,9 +291,10 @@ var starterTemplatesPreview = {"site_url":"#","AstColorPaletteVarPrefix":"--ast-
 					}
 				}
 			</style>
-			<link rel="icon" href="images/cropped-favicon-free-img-300x300.png" sizes="32x32">
-<link rel="icon" href="images/cropped-favicon-free-img-300x300.png" sizes="192x192">
-<link rel="apple-touch-icon" href="images/cropped-favicon-free-img-300x300.png">
+			<link rel="icon" href="images/cropped-favicon-free-img-300x300.png?v=2" sizes="32x32">
+<link rel="icon" href="images/cropped-favicon-free-img-300x300.png?v=2" sizes="192x192">
+<link rel="apple-touch-icon" href="images/cropped-favicon-free-img-300x300.png?v=2">
+<link rel="shortcut icon" href="favicon.ico?v=3" type="image/x-icon">
 <script src="js/wp-emoji-release.min.js" defer=""></script><style>
 .uael-grid-img img {
 	width: 100%;
@@ -1210,27 +1211,44 @@ const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(
 </script>
 <style>
 .wishlist-btn {
+	display: block;
+	width: 100%;
 	margin-top: 12px;
-	border: 1px solid #da2128;
+	border: 2px solid #da2128;
 	background: #ffffff;
 	color: #da2128;
-	padding: 8px 12px;
-	font-size: 12px;
+	padding: 10px 12px;
+	font-size: 13px;
 	font-weight: 700;
 	letter-spacing: 0.03em;
 	text-transform: uppercase;
 	cursor: pointer;
-	transition: all 0.2s ease;
+	transition: all 0.3s ease;
+	border-radius: 4px;
+	font-family: 'Montserrat', sans-serif;
 }
 
 .wishlist-btn:hover {
 	background: #da2128;
 	color: #ffffff;
+	box-shadow: 0 4px 12px rgba(218, 33, 40, 0.3);
+	transform: translateY(-2px);
 }
 
 .wishlist-btn.is-favourite {
-	background: #da2128;
-	color: #ffffff;
+	background: #e9e4e4;
+	color: #000000;
+	border-color: #e9e4e4;
+}
+
+.wishlist-btn.is-favourite:hover {
+	background: #d9d4d4;
+	border-color: #d9d4d4;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.wishlist-btn i {
+	margin-right: 6px;
 }
 </style>
 <script>
