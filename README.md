@@ -1,4 +1,4 @@
-# 🏠 Krishan Realty - Real Estate Portal
+# Krishan Realty - Real Estate Portal
 
 > A modern, full-featured real estate platform connecting buyers with premium properties across Nepal
 
@@ -6,48 +6,50 @@
 [![License](https://img.shields.io/badge/License-MIT-blue)](#license)
 [![Status](https://img.shields.io/badge/Status-Active-success)]()
 
----
-
-## 📋 Table of Contents
-
-- [Features](#-features)
-- [Tech Stack](#-tech-stack)
-- [Project Structure](#-project-structure)
-- [Quick Start](#-quick-start)
-- [Configuration](#-configuration)
-- [API Endpoints](#-api-endpoints)
-- [Deployment](#-deployment)
-- [License](#-license)
+Live Demo: [https://project-broker.onrender.com/login.html](https://project-broker.onrender.com/login.html)
 
 ---
 
-## ✨ Features
+## Table of Contents
 
-### 🔐 Authentication & Security
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Quick Start](#quick-start)
+- [Configuration](#configuration)
+- [API Endpoints](#api-endpoints)
+- [Deployment](#deployment)
+- [License](#license)
+
+---
+
+## Features
+
+### Authentication & Security
 - **JWT-based authentication** with secure token generation
 - **Password hashing** using bcryptjs
 - **User registration & login** with email verification
 - **Session management** with persistent user data
 
-### 🏘️ Property Management
+### Property Management
 - **Premium Property Listings** - Browse 12+ high-value properties across Nepal
 - **Advanced Search** - Filter by location, price, and availability status
 - **Property Details** - Comprehensive information with high-quality images
 - **Quick Information** - Property specifications at a glance
 
-### ❤️ Favorites System
+### Favorites System
 - **Save Favorites** - Add properties to your personal favorites list
 - **Organize Saved Properties** - Easy-to-use dashboard for saved properties
 - **Remove from Favorites** - One-click removal from your saved list
 - **Persistent Storage** - Favorites are saved per user account
 
-### 👤 User Portal
+### User Portal
 - **Personal Dashboard** - View saved properties and statistics
 - **Profile Management** - Update user information
 - **Statistics Dashboard** - Track available properties and favorites count
 - **Responsive Design** - Seamless experience on all devices
 
-### 🎨 UI/UX Features
+### UI/UX Features
 - **Modern Design** - Clean, professional interface
 - **Mobile Responsive** - Optimized for desktop, tablet, and mobile
 - **Fast Loading** - Optimized images and assets
@@ -55,7 +57,7 @@
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Category | Technology |
 |----------|------------|
@@ -70,14 +72,14 @@
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 Project-Broker/
-├── 📄 server.js                    # Express server & API routes
-├── 📦 package.json                 # Dependencies & scripts
-├── 📊 buyer_portal.db              # SQLite database
-├── 📚 website/
+├── server.js                       # Express server & API routes
+├── package.json                    # Dependencies & scripts
+├── buyer_portal.db                 # SQLite database
+├── website/
 │   ├── index.html                  # Homepage
 │   ├── login.html                  # Authentication page
 │   ├── dashboard.html              # User favorites dashboard
@@ -95,14 +97,14 @@ Project-Broker/
 │   ├── images/                     # Property & brand images
 │   ├── fonts/                      # Web fonts
 │   └── favicon.ico                 # Website favicon
-├── 🔧 rebuild_site.py              # Build utility script
-├── 📝 README.md                    # This file
-└── 📋 render.yaml                  # Deployment configuration
+├── rebuild_site.py                 # Build utility script
+├── README.md                       # This file
+└── render.yaml                     # Deployment configuration
 ```
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -130,10 +132,10 @@ Project-Broker/
    The server will start on `http://localhost:3000`
 
 4. **Access the application**
-   - 🏠 Website Home: http://localhost:3000
-   - 🔑 Login: http://localhost:3000/login
-   - 📊 Dashboard: http://localhost:3000/dashboard
-   - 🏘️ Properties: http://localhost:3000/projects.html
+   - Website Home: http://localhost:3000
+   - Login: http://localhost:3000/login
+   - Dashboard: http://localhost:3000/dashboard
+   - Properties: http://localhost:3000/projects.html
 
 ### Default Test Account
 
@@ -144,7 +146,7 @@ Password: password123
 
 ---
 
-## ⚙️ Configuration
+## Configuration
 
 ### Environment Variables
 
@@ -166,7 +168,7 @@ The database is created automatically on first run. It includes:
 
 ---
 
-## 📡 API Endpoints
+## API Endpoints
 
 ### Authentication
 
@@ -194,7 +196,7 @@ The database is created automatically on first run. It includes:
 
 ---
 
-## 🌐 Deployment
+## Deployment
 
 ### Deploy to Render (Recommended)
 
@@ -224,7 +226,7 @@ Render will automatically configure:
 5. Set Health Check Path: `/healthz`
 6. Deploy
 
-### ⚠️ Important: SQLite on Render
+### Important: SQLite on Render
 
 SQLite doesn't persist by default on Render. For production:
 
@@ -250,7 +252,7 @@ The application is compatible with:
 
 ---
 
-## 🎨 Customization
+## Customization
 
 ### Branding
 
@@ -267,22 +269,22 @@ Edit property data in:
 
 ---
 
-## 📞 Contact & Support
+## Contact & Support
 
 **Krishan Realty**
-- 📞 Phone: +977 9822321530
-- 📧 Email: kryshan753@gmail.com
-- 📍 Location: Kathmandu, Nepal
+- Phone: +977 9822321530
+- Email: kryshan753@gmail.com
+- Location: Kathmandu, Nepal
 
 ---
 
-## ⚖️ License
+## License
 
 This project is licensed under the **MIT License** - see the LICENSE file for details.
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please follow these steps:
 
@@ -294,7 +296,7 @@ Contributions are welcome! Please follow these steps:
 
 ---
 
-## 📊 Stats & Info
+## Stats & Info
 
 - **Version**: 1.0.0
 - **Last Updated**: April 2026
@@ -313,7 +315,7 @@ Contributions are welcome! Please follow these steps:
 
 ---
 
-**Made with ❤️ by Krishan Realty Team**
+**Made by Krishan Realty Team**
 
 - `POST /api/login` - Login user
   - Body: `{ "email": "user@example.com", "password": "password123" }`
